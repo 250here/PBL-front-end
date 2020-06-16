@@ -17,6 +17,9 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { IndexComponent } from './main/index/index.component';
+import { AaaComponent } from './aaa/aaa.component';
+import { AComponent } from './main/a/a.component';
+import { StudentCommonComponent } from './main/student/student-common/student-common.component';
 
 registerLocaleData(zh);
 
@@ -26,7 +29,10 @@ registerLocaleData(zh);
     StudentComponent,
     TeacherComponent,
     NavbarComponent,
-    IndexComponent
+    IndexComponent,
+    AaaComponent,
+    AComponent,
+    StudentCommonComponent
   ],
   imports: [
     BrowserModule,

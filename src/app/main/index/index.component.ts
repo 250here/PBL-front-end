@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './user.service';
+
 
 @Component({
   selector: 'app-index',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-
-  constructor() { }
+  loginUser={};
+  registeStudent={};
+  constructor(
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  public doLogin(){
+    this.userService.login(this.loginUser)
+    .subscribe(data => {
+      
+    });
   }
 
 }

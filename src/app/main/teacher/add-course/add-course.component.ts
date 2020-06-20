@@ -39,7 +39,6 @@ export class AddCourseComponent implements OnInit {
   }
 
   submitForm() {
-
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();

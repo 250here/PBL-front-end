@@ -1,29 +1,85 @@
 <br />
-<nz-input-group [nzSize]="'large'">
-  <div nz-row [nzGutter]="8">
-    <div>
-      <p>任务名陈：</p>
-    </div>
-    <div>
-      <input type="text" nz-input [ngModel]="" />
-    </div>
-  </div>
-</nz-input-group>
-<br />
+<form nz-form  [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label  nzRequired>项目ID</nz-form-label>
+    <nz-form-control >
+      <input formControlName="courseId" [(ngModel)]="task.courseId" nz-input placeholder="项目ID" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  nzRequired>项目名称</nz-form-label>
+    <nz-form-control >
+      <input formControlName="taskName" [(ngModel)]="task.projectName" nz-input placeholder="项目名称" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  nzRequired> 项目起止时间</nz-form-label>
+    <nz-form-control >
+      <nz-range-picker nzShowTime formControlName="rangePickerTime"></nz-range-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  nzRequired>项目描述</nz-form-label>
+    <nz-form-control >
+      <input formControlName="taskDsc" [(ngModel)]="task.projectDsc" nz-input placeholder="项目描述" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  nzRequired> 项目评价时间</nz-form-label>
+    <nz-form-control >
+      <nz-date-picker [nzFormat]="" formControlName="evaluationTime"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  nzRequired>老师评分占比</nz-form-label>
+    <nz-form-control >
+      <input formControlName="teacherEvaWeight" [(ngModel)]="task.teacherEvaWeight" nz-input placeholder="老师评分占比" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label  nzRequired>学生评分占比</nz-form-label>
+    <nz-form-control >
+      <input formControlName="stuEvaWeight" [(ngModel)]="task.stuEvaWeight" nz-input placeholder="学生评分占比" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control >
+      <button nz-button nzType="primary">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<!--<nz-input-group [nzSize]="'large'">-->
+<!--  <div nz-row [nzGutter]="8">-->
+<!--    <div>-->
+<!--      <p>任务名陈：</p>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <input type="text" nz-input [ngModel]="" />-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nz-input-group>-->
+<!--<br />-->
 
 
-<nz-input-group nzCompact>
-  <p>开始时间</p>
-  <nz-date-picker></nz-date-picker>
-</nz-input-group>
-<br />
-<nz-input-group nzCompact>
-  <p>结束时间</p>
-  <nz-date-picker></nz-date-picker>
-</nz-input-group>
-<div>
-  <br />
-  <p>任务说明：</p><input type="text" nz-input [ngModel]="" width="20%">
-</div>
-<br />
-<button nz-button nzType="primary" nzSize="large" >确认</button>
+<!--<nz-input-group nzCompact>-->
+<!--  <p>开始时间</p>-->
+<!--  <nz-date-picker></nz-date-picker>-->
+<!--</nz-input-group>-->
+<!--<br />-->
+<!--<nz-input-group nzCompact>-->
+<!--  <p>结束时间</p>-->
+<!--  <nz-date-picker></nz-date-picker>-->
+<!--</nz-input-group>-->
+<!--<div>-->
+<!--  <br />-->
+<!--  <p>任务说明：</p><input type="text" nz-input [ngModel]="" width="20%">-->
+<!--</div>-->
+<!--<br />-->
+<!--<button nz-button nzType="primary" nzSize="large" >确认</button>-->

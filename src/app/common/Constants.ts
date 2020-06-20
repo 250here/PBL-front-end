@@ -12,6 +12,7 @@ export class Constants {
     SEARCHCOURSE: this.urlBase + 'student/searchCourse',
     SIGN_UP_URL: this.urlBase + 'student/register',
     ADD_COURSE_URL: this.urlBase + 'teacher/course/courseInfo',
+    ADD_TASK_URL: this.urlBase + 'teacher/course/project/projectInfo',
 
     UPLOAD_PHOTO: this.urlBase + 'user/userProfilePic',
     UPDATE_PASSWORD: this.urlBase + 'user/pass',

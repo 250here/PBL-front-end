@@ -1,0 +1,23 @@
+<br>
+<nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" nzDirectory>
+  <button nz-button><i nz-icon nzType="upload"></i> Upload Directory</button>
+</nz-upload>
+<br>
+<nz-table #basicTable [nzData]="dataSet">
+  <thead>
+  <tr>
+    <th>文件名</th>
+    <th>下载</th>
+    <th>删除</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>name</td>
+    <td><nz-button-group>下载</nz-button-group></td>
+    <td>
+      <nz-button-group>删除</nz-button-group>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

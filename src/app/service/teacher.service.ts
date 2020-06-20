@@ -19,4 +19,15 @@ export class TeacherService {
     console.log(httpoptions);
     return this.httpClient.post(this.constants.urls.ADD_COURSE_URL, course, httpoptions);
   }
+  getCourses(){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.GETCOURSES, httpoptions);
+  }
+
+  deleteCourse(courseId){
+    const tokenOptions = this.constants.tokenOptions();
+    return this.httpClient.post(this.constants.urls.DELETE_COURSE + courseId, {}, tokenOptions);
+  }
+  getStudents(){
+  }
 }

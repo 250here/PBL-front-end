@@ -12,6 +12,10 @@ export class Constants {
     SIGN_UP_URL: this.urlBase + 'student/register',
     ADD_COURSE_URL: this.urlBase + 'teacher/course/courseInfo',
     ADD_TASK_URL: this.urlBase + 'teacher/course/project/projectInfo',
+    ADD_TEACHER_URL: this.urlBase + '/admin/teacherInfo',
+    ADD_STUDENT_URL: this.urlBase + '/admin/studentInfo',
+    SEARCH_USER: this.urlBase + '/userInfo/',
+    DELETE_USER: this.urlBase + '/userInfo/',
 
     UPLOAD_PHOTO: this.urlBase + 'user/userProfilePic',
     UPDATE_PASSWORD: this.urlBase + 'user/pass',
@@ -27,6 +31,9 @@ export class Constants {
     SEARCHCOURSE: this.urlBase + 'student/course/courseIndexInfo/',
     TAKE_COURSE: this.urlBase + 'student/course/studentInfo/takesCourse/',
 
+    GETCOURSES: this.urlBase + 'teacher/course/courseList/',
+    DELETE_COURSE: this.urlBase + 'teacher/course/courseInfo/',
+    GET_TASK_OF_COURSE: this.urlBase + 'teacher/course/project/projectList/',
   };
   ROLES = {
     ADMIN: 'ROLE_ADMIN',

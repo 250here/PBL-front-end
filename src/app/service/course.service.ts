@@ -29,4 +29,8 @@ export class CourseService {
     console.log(httpoptions);
     return this.httpClient.post(this.constants.urls.ADD_COURSE_URL, task, httpoptions);
   }
+  getTask(courseId){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.GET_TASK_OF_COURSE + courseId, httpoptions);
+  }
 }

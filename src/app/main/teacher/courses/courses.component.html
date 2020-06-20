@@ -1,1 +1,16 @@
-<p>courses works!</p>
+<nz-list nzGrid>
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="6" *ngFor="let item of data">
+      <nz-list-item>
+        <div style="background: #ECECEC;padding:30px;">
+          <nz-card style="width:300px;" [nzBordered]="false" nzTitle="课程">
+            <p>课程名称:{{item.courseName}}</p>
+            <p>教师id：{{item.teacherId}}</p>
+            <p><button nz-button>查看项目</button></p>
+            <p><button nz-button (click)="deleteCourse(item.courseId)">删除课程</button></p>
+          </nz-card>
+        </div>
+      </nz-list-item>
+    </div>
+  </div>
+</nz-list>

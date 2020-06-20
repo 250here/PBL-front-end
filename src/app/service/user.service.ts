@@ -39,4 +39,25 @@ export class UserService {
     };
     return this.httpClient.put(this.constants.urls.UPDATE_PASSWORD, encyprtPasswords, jsonTokenOptions);
   }
+  addTeacher(user: object){
+    console.log(user);
+    let httpoptions = this.constants.jsonTokenOptions();
+    console.log(httpoptions);
+    return this.httpClient.post(this.constants.urls.ADD_TEACHER_URL, user, httpoptions);
+  }
+  addStudent(user: object){
+    console.log(user);
+    let httpoptions = this.constants.jsonTokenOptions();
+    console.log(httpoptions);
+    return this.httpClient.post(this.constants.urls.ADD_STUDENT_URL, user, httpoptions);
+  }
+
+  searchUser(userName){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.SEARCH_USER + userName, httpoptions);
+  }
+  deleteUser(userId){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.delete(this.constants.urls.DELETE_USER + userId, httpoptions);
+  }
 }

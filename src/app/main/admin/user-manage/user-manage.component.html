@@ -1,26 +1,26 @@
 <br>
-<form nz-form>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="3">用户名</nz-form-label>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="addUser()">
+  <nz-form-item >
+    <nz-form-label [nzSpan]="3" nzRequired>用户名</nz-form-label>
     <nz-form-control [nzSpan]="3">
-      <input nz-input name="userName" type="text" >
+      <input formControlName="userName" [(ngModel)]="user.userName" nz-input placeholder="用户名"  >
     </nz-form-control>
   </nz-form-item >
   <nz-form-item>
-    <nz-form-label [nzSpan]="3">密码</nz-form-label>
+    <nz-form-label [nzSpan]="3" nzRequired>密码</nz-form-label>
     <nz-form-control [nzSpan]="3">
-      <input nz-input name="password" type="text" >
+      <input formControlName="password" [(ngModel)]="user.password" nz-input placeholder="密码">
     </nz-form-control>
   </nz-form-item >
   <nz-form-item>
-    <nz-form-label [nzSpan]="3">ID</nz-form-label>
+    <nz-form-label [nzSpan]="3" nzRequired>ID</nz-form-label>
     <nz-form-control [nzSpan]="3">
-      <input nz-input name="userID" type="text" >
+      <input formControlName="userId" [(ngModel)]="user.userId" nz-input placeholder="用户ID">
     </nz-form-control>
   </nz-form-item >
-  <nz-radio-group >
-    <label nz-radio nzValue="老师">老师</label>
-    <label nz-radio nzValue="学生">学生</label>
+  <nz-radio-group [(ngModel)]="radioValue">
+    <label nz-radio nzValue="teacher">老师</label>
+    <label nz-radio nzValue="student">学生</label>
   </nz-radio-group>
 
   <nz-form-item>
@@ -30,25 +30,28 @@
   </nz-form-item>
 </form>
 <br>
-<nz-table #basicTable [nzData]="dataSet">
+
+<nz-input-group style="width:300px;" nzSearch nzSize="large" nzPrefixIcon="search">
+  <input [(ngModel)]="userName" type="text" nz-input placeholder="input search text"/>
+<!--  <nz-input-group nzPrefixIcon="search">-->
+    <button nz-button nzType="primary" nzSize="small" nzSearch (click)="searchUser()" >Search</button>
+<!--  </nz-input-group>-->
+</nz-input-group>
+<br>
+<nz-table #basicTable [nzData]="data">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Address</th>
-    <th>Action</th>
+    <th>用户名</th>
+    <th>用户ID</th>
+    <th>删除用户</th>
+
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td>{{data.name}}</td>
-    <td>{{data.age}}</td>
-    <td>{{data.address}}</td>
-    <td>
-      <a>Action 一 {{data.name}}</a>
-      <nz-divider nzType="vertical"></nz-divider>
-      <a>Delete</a>
-    </td>
+  <tr *ngFor="let item of data">
+    <td>{{item.userName}}</td>
+    <td>{{item.userId}}</td>
+    <td><button nz-button (click)="deleteUser(item.userId)">删除</button></td>
   </tr>
   </tbody>
 </nz-table>

@@ -62,9 +62,12 @@ export class UserinfoComponent implements OnInit {
       (result: any) => {
         console.log(result);
         if (result.code == '0') {
-          localStorage.setItem('token', result.data.token);
+          // localStorage.setItem('token', result.data.token);
           this.constants.updateState();
           this.message.success('密码更新成功');
+          localStorage.clear();
+          this.constants.updateState();
+          this.router.navigateByUrl('');
         } else {
           this.message.create('error', result.message);
         }

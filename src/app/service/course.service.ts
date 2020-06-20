@@ -14,7 +14,12 @@ export class CourseService {
   }
 
   public searchCourse(courseName) {
-    let httpoptions = this.constants.tokenOptions();
-    return this.httpClient.get(this.constants.urls.LOGIN_URL + '/' + courseName, httpoptions);
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.SEARCHCOURSE + courseName, httpoptions);
+  }
+
+  public takeCourse(courseId) {
+    const tokenOptions = this.constants.tokenOptions();
+    return this.httpClient.post(this.constants.urls.TAKE_COURSE + courseId, {}, tokenOptions);
   }
 }

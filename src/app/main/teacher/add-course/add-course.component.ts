@@ -44,6 +44,9 @@ export class AddCourseComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+    if(this.validateForm.invalid){
+      return;
+    }
     let datas: any = this.validateForm.getRawValue();
     console.log(datas);
     this.course.courseStartTime = datas.rangePickerTime[0];

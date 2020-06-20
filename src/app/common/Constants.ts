@@ -9,7 +9,6 @@ export class Constants {
   urlBase = 'http://localhost:8081/';
   urls = {
     LOGIN_URL: this.urlBase + 'user/login',
-    SEARCHCOURSE: this.urlBase + 'student/searchCourse',
     SIGN_UP_URL: this.urlBase + 'student/register',
     ADD_COURSE_URL: this.urlBase + 'teacher/course/courseInfo',
 
@@ -24,6 +23,8 @@ export class Constants {
 
     DISCUSS_LIST: this.urlBase + 'course/project/discussionList/',
 
+    SEARCHCOURSE: this.urlBase + 'student/course/courseIndexInfo/',
+    TAKE_COURSE: this.urlBase + 'student/course/studentInfo/takesCourse/',
 
   };
   ROLES = {

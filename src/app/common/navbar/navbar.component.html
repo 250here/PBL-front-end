@@ -1,12 +1,4 @@
 <ul nz-menu nzMode="horizontal">
-  <li nz-menu-item nzSelected>
-    <i nz-icon nzType="mail"></i>
-    Navigation One
-  </li>
-  <li nz-menu-item nzDisabled>
-    <i nz-icon nzType="appstore"></i>
-    Navigation Two
-  </li>
   <li nz-submenu nzTitle="Navigation Three - Submenu" nzIcon="setting">
     <ul>
       <li nz-menu-group nzTitle="Item 1">
@@ -32,6 +24,16 @@
             </ul>
           </li>
         </ul>
+      </li>
+    </ul>
+  </li>
+  <li nz-submenu nzTitle="学生" *ngIf="constants.state.role==constants.ROLES.STUDENT">
+    <ul>
+      <li  nz-menu-item nzTitle="Home">
+        <a routerLink="student">主页</a>
+      </li>
+      <li  nz-menu-item nzTitle="搜索">
+        <a routerLink="student/searchCourse"> 搜索课程</a>
       </li>
     </ul>
   </li>

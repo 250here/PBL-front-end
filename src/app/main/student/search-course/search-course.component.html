@@ -1,23 +1,25 @@
-<nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-  <input [(ngModel)]="courseName" type="text" nz-input placeholder="input search text" ng/>
+<nz-input-group style="width:300px;" nzSearch nzSize="large">
+  <input [(ngModel)]="courseName" type="text" nz-input placeholder="input search text"/>
+  <nz-input-group nzPrefixIcon="search">
+    <button nz-button nzType="primary" nzSize="small" nzSearch (click)="doSearchCourse()" >Search</button>
+  </nz-input-group>
 </nz-input-group>
-<ng-template #suffixButton>
-  <button nz-button nzType="primary" nzSize="small" nzSearch>Search</button>
-</ng-template>
 
-
-<nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[]">
-  <nz-card-meta nzTitle="课程名陈" nzDescription="课程描述" [nzAvatar]="avatarTemplate"></nz-card-meta>
-</nz-card>
-<ng-template #avatarTemplate>
-  <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
-</ng-template>
-<ng-template #coverTemplate>
-  <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-</ng-template>
-<ng-template #actionSetting>
-  <i nz-icon nzType="setting">加入课程</i>
-</ng-template>
+<nz-list nzGrid>
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="6" *ngFor="let item of data">
+      <nz-list-item>
+        <div style="background: #ECECEC;padding:30px;">
+          <nz-card style="width:300px;" [nzBordered]="false" nzTitle="课程">
+            <p>课程名称:{{item.courseName}}</p>
+            <p>教师id：{{item.teacherId}}</p>
+            <p><button nz-button (click)="takeCourse(item.courseId)">加入课程</button></p>
+          </nz-card>
+        </div>
+      </nz-list-item>
+    </div>
+  </div>
+</nz-list>
 <!--<ng-template #actionEdit>-->
 <!--  <i nz-icon nzType="edit"></i>-->
 <!--</ng-template>-->

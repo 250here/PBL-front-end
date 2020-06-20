@@ -1,0 +1,29 @@
+<br />
+<nz-input-group [nzSize]="'large'">
+  <div nz-row [nzGutter]="8">
+    <div>
+      <p>任务名陈：</p>
+    </div>
+    <div>
+      <input type="text" nz-input [ngModel]="" />
+    </div>
+  </div>
+</nz-input-group>
+<br />
+
+
+<nz-input-group nzCompact>
+  <p>开始时间</p>
+  <nz-date-picker></nz-date-picker>
+</nz-input-group>
+<br />
+<nz-input-group nzCompact>
+  <p>结束时间</p>
+  <nz-date-picker></nz-date-picker>
+</nz-input-group>
+<div>
+  <br />
+  <p>任务说明：</p><input type="text" nz-input [ngModel]="" width="20%">
+</div>
+<br />
+<button nz-button nzType="primary" nzSize="large" >确认</button>

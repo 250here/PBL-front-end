@@ -6,14 +6,12 @@ import {Constants} from '../common/Constants';
   providedIn: 'root'
 })
 export class CourseService {
-  list = [];
+
   constructor(
     private httpClient: HttpClient,
     private constants: Constants,
-  ) {
-  }
+  ) { }
   public searchCourse(courseName){
-    return this.httpClient.post(this.constants.urls.SEARCHCOURSE, courseName);
+    return this.httpClient.post(this.constants.urls.LOGIN_URL, courseName);
   }
-  getData(){}
 }

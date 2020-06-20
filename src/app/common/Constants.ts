@@ -7,7 +7,7 @@ export class Constants {
   urlBase = 'http://localhost:8080/';
   urls = {
     LOGIN_URL: this.urlBase + '',
-    SEARCHCOURSE: this.urlBase + '/student/searchCourse',
+    SEARCHCOURSE: this.urlBase + 'student/searchCourse',
   }
 
   constructor() { }

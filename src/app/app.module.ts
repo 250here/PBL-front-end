@@ -25,6 +25,10 @@ import { AdminComponent } from './main/admin/admin.component';
 import { UserManageComponent } from './main/admin/user-manage/user-manage.component';
 import { StudentGroupComponent } from './main/student/student-group/student-group.component';
 import { TaskComponent } from './main/student/task/task.component';
+import { DiscussComponent } from './main/student/discuss/discuss.component';
+import { AddTaskComponent } from './main/student/add-task/add-task.component';
+import { AddCourseComponent } from './main/teacher/add-course/add-course.component';
+import { ScoreComponent } from './main/teacher/score/score.component';
 
 
 registerLocaleData(zh);
@@ -37,6 +41,7 @@ registerLocaleData(zh);
     NavbarComponent,
     IndexComponent,
     StudentGroupComponent,
+    DiscussComponent,
     SearchCourseComponent,
     StudentCourseComponent,
     TeacherCourseComponent,
@@ -44,6 +49,10 @@ registerLocaleData(zh);
     UserManageComponent,
     StudentGroupComponent,
     TaskComponent,
+    DiscussComponent,
+    AddTaskComponent,
+    AddCourseComponent,
+    ScoreComponent,
 
   ],
   imports: [

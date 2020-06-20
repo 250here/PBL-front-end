@@ -17,6 +17,7 @@ export class SearchCourseComponent implements OnInit {
   public doSearchCourse(){
     this.courseService.searchCourse(this.courseName)
       .subscribe(data => {
+        console.log(data);
       });
   }
   onSearchClick(){

@@ -11,11 +11,18 @@ export class Constants {
     LOGIN_URL: this.urlBase + 'user/login',
     SIGN_UP_URL: this.urlBase + 'student/register',
     ADD_COURSE_URL: this.urlBase + 'teacher/course/courseInfo',
+
     ADD_TASK_URL: this.urlBase + 'teacher/course/project/projectInfo',
     ADD_TEACHER_URL: this.urlBase + '/admin/teacherInfo',
     ADD_STUDENT_URL: this.urlBase + '/admin/studentInfo',
     SEARCH_USER: this.urlBase + '/userInfo/',
     DELETE_USER: this.urlBase + '/userInfo/',
+
+    ADD_PROJECT_URL: this.urlBase + 'teacher/course/project/projectInfo',
+    GET_PROJECTS: this.urlBase + 'teacher/course/project/projectList/',
+    TEACHER_GET_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
+    TEACHER_REMOVE_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
+
 
     UPLOAD_PHOTO: this.urlBase + 'user/userProfilePic',
     UPDATE_PASSWORD: this.urlBase + 'user/pass',
@@ -30,6 +37,29 @@ export class Constants {
 
     SEARCHCOURSE: this.urlBase + 'student/course/courseIndexInfo/',
     TAKE_COURSE: this.urlBase + 'student/course/studentInfo/takesCourse/',
+    TAKEN_COURSES: this.urlBase + 'student/course/joinedCourseInfos',
+    QUIT_COURSES: this.urlBase + 'student/course/studentInfo/dropCourse/',
+
+    ALL_PROJECTS: this.urlBase + 'student/course/project/projectList/',
+    GET_PROJECT: this.urlBase + 'student/course/project/projectInfo/',
+    MY_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/joinedPj/',
+    JOIN_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/joinPj/',
+    QUIT_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/dropPj/',
+
+    ALL_PJ_GROUP: this.urlBase + 'student/course/project/group/pjGroupList/',
+    PJ_GROUP_INFO: this.urlBase + 'student/course/project/group/pjGroupInfo/',
+    MY_PJ_GROUP_INFO: this.urlBase + 'student/course/project/group/myPjGroupInfo/',
+    CREATE_GROUP: this.urlBase + 'student/course/project/group/pjGroupInfo/',
+    JOIN_GROUP: this.urlBase + 'student/course/project/group/studentInfo/',
+    QUIT_GROUP: this.urlBase + 'student/course/project/group/studentInfo/dropGroup/',
+
+    TASK_FROM_TEACHER_LIST: this.urlBase + '/student/course/project/pjTaskList/',
+    TTASK: this.urlBase + '/student/course/project/pjTaskInfo/',
+    CREATE_STASK: this.urlBase + '/student/course/project/pjGroupTask',
+    STASK_LIST: this.urlBase + '/student/course/project/pjGroupTaskList/',
+    REMOVE_STASK: this.urlBase + '/student/course/project/pjGroupTaskInfo/',
+    FINISH_STASK: this.urlBase + '/student/course/project/pjGroupTaskFinished/',
+    // TASK_FROM_TEACHER_LIST: this.urlBase + '/student/course/project/',
 
     GETCOURSES: this.urlBase + 'teacher/course/courseList/',
     DELETE_COURSE: this.urlBase + 'teacher/course/courseInfo/',
@@ -75,7 +105,8 @@ export class Constants {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})
     };
   }
-  token(){
+
+  token() {
     return 'Bearer ' + localStorage.getItem('token');
   }
 }

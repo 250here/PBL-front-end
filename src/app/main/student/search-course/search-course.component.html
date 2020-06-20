@@ -12,7 +12,9 @@
         <div style="background: #ECECEC;padding:30px;">
           <nz-card style="width:300px;" [nzBordered]="false" nzTitle="课程">
             <p>课程名称:{{item.courseName}}</p>
-            <p>教师id：{{item.teacherId}}</p>
+            <p>课程码：{{item.courseId}}</p>
+            <p>开始日期 ：{{item.courseStartTime}}</p>
+            <p>结束日期：{{item.courseEndTime}}</p>
             <p><button nz-button (click)="takeCourse(item.courseId)">加入课程</button></p>
           </nz-card>
         </div>

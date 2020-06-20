@@ -20,7 +20,7 @@ export class AddTaskComponent implements OnInit {
     evaluationTime: null,
     teacherEvaWeight: '',
     stuEvaWeight: '',
-  }
+  };
   validateForm!: FormGroup;
   constructor(
     private fb: FormBuilder,

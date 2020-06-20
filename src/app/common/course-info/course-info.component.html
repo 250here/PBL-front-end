@@ -1,0 +1,79 @@
+<h2>课程项目</h2>
+<button *ngIf="constants.state.role==constants.ROLES.TEACHER" (click)="showAddProjectModel()">添加项目</button>
+<nz-list nzGrid>
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="6" *ngFor="let item of projects">
+      <nz-list-item>
+        <div style="background: #ECECEC;padding:30px;">
+          <nz-card style="width:300px;" [nzBordered]="false" nzTitle="项目">
+            <p>名称:{{item.projectName}}</p>
+            <p>开始日期 ：{{item.startTime}}</p>
+            <p>结束日期：{{item.endTime}}</p>
+            <p>{{item.projectDsc}}</p>
+
+            <p>评分时间：{{item.evaluationTime}}</p>
+            <p>教师评分比重：{{item.teacherEvaWeight}}%</p>
+            <p>学生评价权重：{{item.stuEvaWeight}}%</p>
+            <i nz-icon nzType="setting"><a routerLink="/projectInfo/{{courseId}}/{{item.projectId}}">查看项目</a></i>
+            <a *ngIf="constants.state.role==constants.ROLES.TEACHER" (click)="remove(item.projectId)">删除项目</a>
+          </nz-card>
+        </div>
+      </nz-list-item>
+    </div>
+  </div>
+</nz-list>
+<nz-modal [(nzVisible)]="addProjectModel.isVisible" nzTitle="学生注册" (nzOnCancel)="hiddeAddProjectModel()"
+          >
+  <form nz-form  [formGroup]="validateAddPjForm" (ngSubmit)="addProject()">
+
+
+    <nz-form-item>
+      <nz-form-label  nzRequired>项目名称</nz-form-label>
+      <nz-form-control >
+        <input formControlName="projectName" [(ngModel)]="addProjectModel.task.projectName" nz-input placeholder="项目名称" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  nzRequired> 项目起止时间</nz-form-label>
+      <nz-form-control >
+        <nz-range-picker nzShowTime formControlName="rangePickerTime"></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  nzRequired>项目描述</nz-form-label>
+      <nz-form-control >
+        <input formControlName="projectDsc" [(ngModel)]="addProjectModel.task.projectDsc" nz-input placeholder="项目描述" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  nzRequired> 项目评价时间</nz-form-label>
+      <nz-form-control >
+        <nz-date-picker [nzFormat]="" formControlName="evaluationTime"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  nzRequired>老师评分占比</nz-form-label>
+      <nz-form-control >
+        <input type="number" formControlName="teacherEvaWeight" [(ngModel)]="addProjectModel.task.teacherEvaWeight" nz-input placeholder="老师评分占比" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label  nzRequired>学生评分占比</nz-form-label>
+      <nz-form-control >
+        <input type="number" formControlName="stuEvaWeight" [(ngModel)]="addProjectModel.task.stuEvaWeight" nz-input placeholder="学生评分占比" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control >
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+

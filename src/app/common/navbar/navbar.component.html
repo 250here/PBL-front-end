@@ -35,6 +35,9 @@
       <li  nz-menu-item nzTitle="搜索">
         <a routerLink="student/searchCourse"> 搜索课程</a>
       </li>
+      <li  nz-menu-item nzTitle="已选课程">
+        <a routerLink="student/courses"> 已选课程</a>
+      </li>
     </ul>
   </li>
   <li nz-submenu nzTitle="教师" *ngIf="constants.state.role==constants.ROLES.TEACHER">

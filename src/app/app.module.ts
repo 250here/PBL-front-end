@@ -38,6 +38,8 @@ import { ScoreComponent } from './main/teacher/score/score.component';
 import { FileComponent } from './main/student/file/file.component';
 import {SearchCourseComponent} from './main/student/search-course/search-course.component';
 import { UserinfoComponent } from './common/userinfo/userinfo.component';
+import { CourseInfoComponent } from './common/course-info/course-info.component';
+import { ProjectComponent } from './common/project/project.component';
 
 registerLocaleData(zh);
 
@@ -63,6 +65,8 @@ registerLocaleData(zh);
     ScoreComponent,
     FileComponent,
     UserinfoComponent,
+    CourseInfoComponent,
+    ProjectComponent,
 
   ],
   imports: [

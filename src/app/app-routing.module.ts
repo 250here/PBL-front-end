@@ -18,6 +18,8 @@ import {ScoreComponent} from './main/teacher/score/score.component';
 import {FileComponent} from './main/student/file/file.component';
 
 import {AddCourseComponent} from './main/teacher/add-course/add-course.component';
+import {CourseInfoComponent} from './common/course-info/course-info.component';
+import {ProjectComponent} from './common/project/project.component';
 
 
 const routes: Routes = [
@@ -37,6 +39,8 @@ const routes: Routes = [
   { path: "teacher/courses", component: TeacherCourseComponent },
   { path: "student/file", component: FileComponent },
   { path: "teacher/addCourse", component: AddCourseComponent },
+  { path: "courseInfo/:courseId", component: CourseInfoComponent },
+  { path: "projectInfo/:courseId/:projectId", component: ProjectComponent },
 ];
 
 @NgModule({

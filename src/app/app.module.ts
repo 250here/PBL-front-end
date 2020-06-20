@@ -37,6 +37,7 @@ import { AddCourseComponent } from './main/teacher/add-course/add-course.compone
 import { ScoreComponent } from './main/teacher/score/score.component';
 import { FileComponent } from './main/student/file/file.component';
 import {SearchCourseComponent} from './main/student/search-course/search-course.component';
+import { UserinfoComponent } from './common/userinfo/userinfo.component';
 
 registerLocaleData(zh);
 
@@ -61,6 +62,7 @@ registerLocaleData(zh);
     AddCourseComponent,
     ScoreComponent,
     FileComponent,
+    UserinfoComponent,
 
   ],
   imports: [

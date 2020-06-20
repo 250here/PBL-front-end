@@ -23,8 +23,6 @@ export class UserService {
 
   public signUp(user) {
     let newUser = { id: user.idcard, username: user.username, password: Md5.hashStr(user.password) };
-    let newUser = {id: user.idcard, username: user.username, password: Md5.hashStr(user.password)};
-
     return this.httpClient.post(this.constants.urls.SIGN_UP_URL, newUser, this.jsonHttpOptions);
   }
 }

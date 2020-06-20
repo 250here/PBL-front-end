@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-manage.component.scss']
 })
 export class UserManageComponent implements OnInit {
-
+  dataSet: any;
   constructor() { }
 
   ngOnInit(): void {

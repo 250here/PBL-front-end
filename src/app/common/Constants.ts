@@ -12,6 +12,19 @@ export class Constants {
     SEARCHCOURSE: this.urlBase + 'student/searchCourse',
     SIGN_UP_URL: this.urlBase + 'student/register',
     ADD_COURSE_URL: this.urlBase + 'teacher/course/courseInfo',
+
+    UPLOAD_PHOTO: this.urlBase + 'user/userProfilePic',
+    UPDATE_PASSWORD: this.urlBase + 'user/pass',
+    PHOTO_PATH: this.urlBase + 'user/photo',
+
+    SHARE_FILE: this.urlBase + 'course/project/sharedFile',
+    ALL_FILE_OF_PROJECT: this.urlBase + 'course/project/sharedFiles/',
+    DOWNLOAD_FILE: this.urlBase + 'course/project/sharedFile/',
+    DELETE_FILE: this.urlBase + 'course/project/sharedFile/',
+
+    DISCUSS_LIST: this.urlBase + 'course/project/discussionList/',
+
+
   };
   ROLES = {
     ADMIN: 'ROLE_ADMIN',
@@ -35,25 +48,26 @@ export class Constants {
     this.state.profilePhoto = localStorage.getItem('profilePhoto');
   }
 
-  jsonTokenOptions(){
+  jsonTokenOptions() {
     return {
       headers: new HttpHeaders({'Content-Type': 'application/json;charset=utf-8'})
         .append('Authorization', 'Bearer ' + localStorage.getItem('token'))
     };
   }
 
-  jsonOptions(){
+  jsonOptions() {
     return {
       headers: new HttpHeaders({'Content-Type': 'application/json;charset=utf-8'})
     };
   }
 
-  tokenOptions(){
+  tokenOptions() {
     return {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})
     };
   }
 }
+
 //
 // export class HttpOptionsGenerater {
 //   httpheaders: object = {};

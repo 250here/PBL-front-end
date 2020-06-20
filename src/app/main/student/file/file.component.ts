@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file.component.scss']
 })
 export class FileComponent implements OnInit {
-
+  dataSet;
   constructor() { }
 
   ngOnInit(): void {

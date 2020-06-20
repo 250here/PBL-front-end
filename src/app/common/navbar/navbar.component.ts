@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { UserService } from 'src/app/service/user.service';
 import { Router, RouterLink } from '@angular/router';
-import { HttpOptionsGenerater, Constants } from '../Constants';
+import { Constants } from '../Constants';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -50,7 +50,6 @@ export class NavbarComponent implements OnInit {
       idcardErr: '必须输入id！',
     }
   };
-  private httpOptionGenerater: HttpOptionsGenerater = new HttpOptionsGenerater();
   constructor(
     private fb: FormBuilder,
     public constants: Constants,
@@ -71,7 +70,6 @@ export class NavbarComponent implements OnInit {
       password: [null, [Validators.required, Validators.pattern("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$")]],
       password2: [null, [this.confirmValidator]],
     });
-    //console.log(this.httpOptionGenerater.clear().json().token().generate());
   }
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
@@ -123,6 +121,7 @@ export class NavbarComponent implements OnInit {
   }
   doLogOut() {
     localStorage.clear();
+    this.constants.updateState();
     this.router.navigateByUrl('');
   }
 
@@ -159,6 +158,5 @@ export class NavbarComponent implements OnInit {
   }
   createMessage(type: string, msg: string): void {
     this.message.create(type, msg);
-    this.constants.updateState();
   }
 }

@@ -14,7 +14,11 @@ import {TaskComponent} from './main/student/task/task.component';
 import {DiscussComponent} from './main/student/discuss/discuss.component';
 import {AddTaskComponent} from './main/student/add-task/add-task.component';
 import {ScoreComponent} from './main/teacher/score/score.component';
+
 import {FileComponent} from './main/student/file/file.component';
+
+import {AddCourseComponent} from './main/teacher/add-course/add-course.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: "index", pathMatch: "full" },
@@ -32,6 +36,7 @@ const routes: Routes = [
   { path: "teacher/score", component: ScoreComponent },
   { path: "teacher/courses", component: TeacherCourseComponent },
   { path: "student/file", component: FileComponent },
+  { path: "teacher/addCourse", component: AddCourseComponent },
 ];
 
 @NgModule({

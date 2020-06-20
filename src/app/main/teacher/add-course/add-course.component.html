@@ -1,28 +1,44 @@
-<br />
-<nz-input-group [nzSize]="'large'">
-  <div nz-row [nzGutter]="8">
-    <div>
-      <p>课程名陈：</p>
-    </div>
-    <div>
-      <input type="text" nz-input [ngModel]="" />
-    </div>
-  </div>
-  <div nz-row [nzGutter]="8">
-    <div>
-      <p>任课教师：</p>
-    </div>
-    <div>
-      <input type="text" nz-input [ngModel]="" />
-    </div>
-  </div>
-  <div nz-row [nzGutter]="8">
-    <div>
-      <p>课程说明：</p>
-    </div>
-    <div>
-      <input type="text" nz-input [ngModel]="" />
-    </div>
-  </div>
-</nz-input-group>
-<br />
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<!--  <nz-form-item>-->
+<!--    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>DatePicker</nz-form-label>-->
+<!--    <nz-form-control [nzSm]="16" [nzXs]="24">-->
+<!--      <nz-date-picker formControlName="datePicker"></nz-date-picker>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+<!--  <nz-form-item>-->
+<!--    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>DatePicker[ShowTime]</nz-form-label>-->
+<!--    <nz-form-control [nzSm]="16" [nzXs]="24">-->
+<!--      <nz-date-picker nzShowTime formControlName="datePickerTime"></nz-date-picker>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+  <nz-form-item>
+    <nz-form-label  nzRequired>课程名称</nz-form-label>
+    <nz-form-control >
+      <input formControlName="courseName" [(ngModel)]="course.courseName" nz-input placeholder="课程名称" />
+    </nz-form-control>
+  </nz-form-item>
+<!--  <nz-form-item>-->
+<!--    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>RangePicker</nz-form-label>-->
+<!--    <nz-form-control [nzSm]="16" [nzXs]="24">-->
+<!--      <nz-range-picker formControlName="rangePicker"></nz-range-picker>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+  <nz-form-item>
+    <nz-form-label  nzRequired> 课程起止时间</nz-form-label>
+    <nz-form-control >
+      <nz-range-picker nzShowTime formControlName="rangePickerTime"></nz-range-picker>
+    </nz-form-control>
+  </nz-form-item>
+<!--  <nz-form-item>-->
+<!--    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>TimePicker</nz-form-label>-->
+<!--    <nz-form-control [nzSm]="16" [nzXs]="24">-->
+<!--      <nz-time-picker formControlName="timePicker"></nz-time-picker>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+  <nz-form-item>
+    <nz-form-control >
+      <button nz-button nzType="primary">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

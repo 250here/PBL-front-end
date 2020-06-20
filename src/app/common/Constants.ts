@@ -66,6 +66,9 @@ export class Constants {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})
     };
   }
+  token(){
+    return 'Bearer ' + localStorage.getItem('token');
+  }
 }
 
 //

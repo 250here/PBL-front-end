@@ -1,11 +1,48 @@
 <div>
-  <nz-avatar [nzShape]="'square'" [nzSize]="64" [nzIcon]="'user'"></nz-avatar>
-  <nz-card style="width:300px;" nzTitle="姓名" [nzExtra]="extraTemplate">
-    <p>邮箱：</p>
-    <p>年级</p>
-    <p></p>
+  <nz-avatar [nzShape]="'square'" [nzSize]="64" [nzIcon]="'user'"
+             nzSrc="{{constants.urlBase}}{{constants.state.profilePhoto}}"></nz-avatar>
+  <nz-upload
+    nzAction="{{constants.urls.UPLOAD_PHOTO}}"
+    [nzHeaders]="{ authorization:  constants.token(),'X-Requested-With': 'XMLHttpRequest'}"
+    nzName="photo"
+    nzAccept="image/*"
+    (nzChange)="handleAvatarChange($event)"
+  >
+  <button nz-button><i nz-icon nzType="upload"></i>更换头像</button>
+  </nz-upload>
+  <nz-card style="width:300px;" nzTitle="资料板" >
+    <p>用户名：{{constants.state.username}}</p>
+    <p>角色:{{constants.state.role}}</p>
+
   </nz-card>
-  <ng-template #extraTemplate>
-    <a>修改信息</a>
-  </ng-template>
+    <form style="width:300px;" nz-form [formGroup]="validateUpdatePasswordForm" (ngSubmit)="doUpdatePassword()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="{{passwordupdateModel.errorMsg.oldPasswordErr}}">
+          <nz-input-group nzPrefixIcon="idcard">
+            <input formControlName="oldpassword" [(ngModel)]="passwordupdateModel.passwords.oldPassword" nz-input placeholder="旧密码" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="{{passwordupdateModel.errorMsg.newPasswordErr}}">
+          <nz-input-group nzPrefixIcon="lock">
+            <input formControlName="newpassword" [(ngModel)]="passwordupdateModel.passwords.newPassword" nz-input type="password"
+                   placeholder="新密码" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="{{passwordupdateModel.errorMsg.newPassword2Err}}">
+          <nz-input-group nzPrefixIcon="lock">
+            <input formControlName="newpassword2" nz-input type="password"
+                   placeholder="确认密码" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" >修改密码</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
 </div>

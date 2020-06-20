@@ -1,11 +1,33 @@
 <br>
 <form nz-form>
   <nz-form-item>
-    <nz-form-label [nzSpan]="3" nzFor="email">E-mail</nz-form-label>
-    <nz-form-control [nzSpan]="14">
-      <input nz-input name="email" type="email" id="email">
+    <nz-form-label [nzSpan]="3">用户名</nz-form-label>
+    <nz-form-control [nzSpan]="3">
+      <input nz-input name="userName" type="text" >
     </nz-form-control>
   </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3">密码</nz-form-label>
+    <nz-form-control [nzSpan]="3">
+      <input nz-input name="password" type="text" >
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3">ID</nz-form-label>
+    <nz-form-control [nzSpan]="3">
+      <input nz-input name="userID" type="text" >
+    </nz-form-control>
+  </nz-form-item >
+  <nz-radio-group >
+    <label nz-radio nzValue="老师">老师</label>
+    <label nz-radio nzValue="学生">学生</label>
+  </nz-radio-group>
+
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" >添加用户</button>
+    </nz-form-control>
+  </nz-form-item>
 </form>
 <br>
 <nz-table #basicTable [nzData]="dataSet">

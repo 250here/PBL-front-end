@@ -73,6 +73,11 @@ export class Constants {
     GETCOURSES: this.urlBase + 'teacher/course/courseList/',
     DELETE_COURSE: this.urlBase + 'teacher/course/courseInfo/',
     GET_TASK_OF_COURSE: this.urlBase + 'teacher/course/project/projectList/',
+
+    // UPLOAD_FILE : this.urlBase + 'course/project/sharedFile',
+    // GET_FILES : this.urlBase + 'course/project/sharedFiles/',
+    // DOWNLOAD_FILE : this.urlBase + 'course/project/sharedFile/',
+    // REMOVE_FILE : this.urlBase + 'course/project/sharedFile/',
   };
   ROLES = {
     ADMIN: 'ROLE_ADMIN',

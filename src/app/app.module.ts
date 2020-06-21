@@ -41,6 +41,7 @@ import { UserinfoComponent } from './common/userinfo/userinfo.component';
 import { CourseInfoComponent } from './common/course-info/course-info.component';
 import { ProjectComponent } from './common/project/project.component';
 import { GroupComponent } from './common/group/group.component';
+import { ProjectfileComponent } from './common/projectfile/projectfile.component';
 
 registerLocaleData(zh);
 
@@ -69,6 +70,7 @@ registerLocaleData(zh);
     CourseInfoComponent,
     ProjectComponent,
     GroupComponent,
+    ProjectfileComponent,
 
   ],
   imports: [

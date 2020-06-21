@@ -6,7 +6,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {TeacherService} from '../../service/teacher.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DiscussService} from '../../service/discuss.service';
-
+import {ProjectFileService} from '../../service/project-file.service';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -34,6 +34,11 @@ export class ProjectComponent implements OnInit {
   commentDatas: any = [];
   commentInput: any = '';
 
+
+  files = [];
+
+  validateFileForm!: FormGroup;
+  fileUpload;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,6 +48,7 @@ export class ProjectComponent implements OnInit {
     private teacherService: TeacherService,
     private fb: FormBuilder,
     private discussService: DiscussService,
+    private projectFileService: ProjectFileService,
   ) {
   }
 
@@ -53,6 +59,7 @@ export class ProjectComponent implements OnInit {
       this.getAllTasks();
       this.getgroups();
       this.getDiscusses();
+      this.getFiles();
       if (this.constants.state.role == this.constants.ROLES.STUDENT) {
         this.getMyGroup();
       }
@@ -61,6 +68,9 @@ export class ProjectComponent implements OnInit {
       taskName: [null],
       rangePickerTime: [[]],
       taskDiscribe: [null],
+    });
+    this.validateFileForm= this.fb.group({
+      file: [null],
     });
   }
 
@@ -260,5 +270,21 @@ export class ProjectComponent implements OnInit {
 
   clearInput() {
     this.commentInput = '';
+  }
+
+  getFiles() {
+
+  }
+  upload(){
+    for (const i in this.validateFileForm.controls) {
+      this.validateFileForm.controls[i].markAsDirty();
+      this.validateFileForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateFileForm.invalid) {
+      return false;
+    }
+    let datas: any = this.validateFileForm.getRawValue();
+    console.log(datas);
+    console.log(this.fileUpload);
   }
 }

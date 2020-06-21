@@ -159,15 +159,12 @@
   </nz-tab>
   <nz-tab nzTitle="文件">
     <h2>文件</h2>
-    <form nz-form [formGroup]="validateFileForm" (ngSubmit)="upload()">
+    <form id="fileForm" enctype="multipart/form-data" nz-form [formGroup]="validateFileForm" (ngSubmit)="upload()">
 
 
-      <nz-form-item>
-        <nz-form-label nzRequired>选择文件</nz-form-label>
-        <nz-form-control>
-          <input required="required" formControlName="file" type="file" [(ngModel)]="fileUpload" nz-input />
-        </nz-form-control>
-      </nz-form-item>
+        <label >选择文件</label>
+          <input name ="multipartFile" required="required" formControlName="multipartFile" type="file" [(ngModel)]="fileUpload" nz-input />
+
 
       <nz-form-item>
         <nz-form-control>
@@ -175,5 +172,38 @@
         </nz-form-control>
       </nz-form-item>
     </form>
+    <h3>文件列表</h3>
+    <nz-table #taskstable [nzData]="tasks">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>时间</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let file of files.myFileResources">
+        <td>{{file.fileId}}</td>
+        <td>{{file.fileName}}</td>
+        <td>{{file.uploadTime}}</td>
+        <td>
+          <a (click)="removeFile(file.fileId)">删除</a>
+          <a (click)="download(file.fileId,file.fileName)">下载</a>
+        </td>
+      </tr>
+      <tr *ngFor="let file of files.otherFileResources">
+        <td>{{file.fileId}}</td>
+        <td>{{file.fileName}}</td>
+        <td>{{file.uploadTime}}</td>
+        <td>
+          <a *ngIf="constants.state.role==constants.ROLES.TEACHER"
+             (click)="removeFile(file.fileId)">删除</a>
+          <a (click)="download(file.fileId,file.fileName)">下载</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+
   </nz-tab>
 </nz-tabset>

@@ -19,7 +19,7 @@ export class ProjectFileService {
   }
 
   downloadSharedFile(fileId) {
-    const httpOption = this.constants.tokenOptions();
+    const httpOption = this.constants.downloadOption();
     return this.httpClient.get(this.constants.urls.DOWNLOAD_FILE + fileId, httpOption);
   }
 

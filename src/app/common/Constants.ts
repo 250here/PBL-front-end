@@ -123,6 +123,12 @@ export class Constants {
   token() {
     return 'Bearer ' + localStorage.getItem('token');
   }
+  downloadOption(){
+    return {
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})
+        .append('responseType', 'blob')
+    };
+  }
 }
 
 //

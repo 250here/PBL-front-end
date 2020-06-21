@@ -7,6 +7,8 @@ import {TeacherService} from '../../service/teacher.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DiscussService} from '../../service/discuss.service';
 import {ProjectFileService} from '../../service/project-file.service';
+import {map} from 'rxjs/operators';
+
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -35,10 +37,11 @@ export class ProjectComponent implements OnInit {
   commentInput: any = '';
 
 
-  files = [];
+  files: any = {};
 
   validateFileForm!: FormGroup;
   fileUpload;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -69,8 +72,8 @@ export class ProjectComponent implements OnInit {
       rangePickerTime: [[]],
       taskDiscribe: [null],
     });
-    this.validateFileForm= this.fb.group({
-      file: [null],
+    this.validateFileForm = this.fb.group({
+      multipartFile: [null],
     });
   }
 
@@ -91,7 +94,7 @@ export class ProjectComponent implements OnInit {
     if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       obj = this.courseService.getAllPjGroupList(this.projectId);
     } else if (this.constants.state.role == this.constants.ROLES.TEACHER) {
-      obj = this.courseService.getAllPjGroupList(this.projectId);
+      obj = this.teacherService.getAllPjGroupList(this.projectId);
     }
     obj.subscribe(
       (result: any) => {
@@ -110,7 +113,7 @@ export class ProjectComponent implements OnInit {
     if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       obj = this.courseService.getPjTaskList(this.projectId);
     } else if (this.constants.state.role == this.constants.ROLES.TEACHER) {
-      obj = this.courseService.getPjTaskList(this.projectId);
+      obj = this.teacherService.getPjTaskList(this.projectId);
     }
     obj.subscribe(
       (result: any) => {
@@ -273,9 +276,17 @@ export class ProjectComponent implements OnInit {
   }
 
   getFiles() {
-
+    this.projectFileService.getSharedFiles(this.projectId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.files = result.data;
+        } else {
+          this.message.error(result.message);
+        }
+      });
   }
-  upload(){
+
+  upload() {
     for (const i in this.validateFileForm.controls) {
       this.validateFileForm.controls[i].markAsDirty();
       this.validateFileForm.controls[i].updateValueAndValidity();
@@ -285,6 +296,47 @@ export class ProjectComponent implements OnInit {
     }
     let datas: any = this.validateFileForm.getRawValue();
     console.log(datas);
-    console.log(this.fileUpload);
+    const form: any = document.getElementById('fileForm');
+    let formData = new FormData(form);
+    // console.log(form);
+    // console.log(formData.get('file'));
+    formData.set('courseId', this.courseId);
+    formData.set('projectId', this.projectId);
+    this.projectFileService.uploadFile(formData).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getFiles();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+  removeFile(fileId){
+    this.projectFileService.deleteSharedFile(fileId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getFiles();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+  download(fileId, fileName){
+    window.location.href=this.constants.urls.DOWNLOAD_FILE + fileId;
+    // this.projectFileService.downloadSharedFile(fileId)
+    //   .pipe(
+    //     map((data: any) => {
+    //   console.log(data);
+    //   const link = document.createElement('a');
+    //   const blob = new Blob([data] );
+    //   link.setAttribute('href', window.URL.createObjectURL(blob));
+    //   link.setAttribute('download', fileName);
+    //   link.style.visibility = 'hidden';
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   document.body.removeChild(link);
+    // })).subscribe();
   }
 }

@@ -15,14 +15,16 @@ export class Constants {
     ADD_TASK_URL: this.urlBase + 'teacher/course/project/projectInfo',
     ADD_TEACHER_URL: this.urlBase + 'admin/teacherInfo',
     ADD_STUDENT_URL: this.urlBase + 'admin/studentInfo',
-    SEARCH_USER: this.urlBase + 'userInfo/',
-    DELETE_USER: this.urlBase + 'userInfo/',
+    SEARCH_USER: this.urlBase + 'admin/userInfo/',
+    DELETE_USER: this.urlBase + 'admin/userInfo/',
 
     ADD_PROJECT_URL: this.urlBase + 'teacher/course/project/projectInfo',
     GET_PROJECTS: this.urlBase + 'teacher/course/project/projectList/',
     TEACHER_GET_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
     TEACHER_REMOVE_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
     TEACHER_HANDLE_REQUEST: this.urlBase + 'teacher/course/dropCourseInfo/',
+    TEACHER_GET_SCORE_INFO: this.urlBase + 'teacher/course/project/gradeRefData/',
+    TEACHER_SRORE: this.urlBase + 'teacher/course/project/gradeData/',
 
     TEACHER_GET_GROUPS: this.urlBase + 'teacher/course/project/pjGroupList/',
     TEACHER_GET_GROUP: this.urlBase + 'teacher/course/project/pjGroupInfo/',
@@ -56,6 +58,9 @@ export class Constants {
     MY_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/joinedPj/',
     JOIN_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/joinPj/',
     QUIT_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/dropPj/',
+    GET_SCORE: this.urlBase + 'student/course/project/studentPjInfo/PjScore/',
+    HAS_EVALUATED: this.urlBase + 'student/course/project/studentPjInfo/isEvaluated/',
+    EVALUATE_EACH_OTHER: this.urlBase + 'student/course/project/studentPjInfo/stuEvaluates',
 
     ALL_PJ_GROUP: this.urlBase + 'student/course/project/group/pjGroupList/',
     PJ_GROUP_INFO: this.urlBase + 'student/course/project/group/pjGroupInfo/',
@@ -124,7 +129,8 @@ export class Constants {
   token() {
     return 'Bearer ' + localStorage.getItem('token');
   }
-  downloadOption(){
+
+  downloadOption() {
     return {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('token')})
         .append('responseType', 'blob')

@@ -48,10 +48,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of data">
-    <td>{{item.userName}}</td>
-    <td>{{item.userId}}</td>
-    <td><button nz-button (click)="deleteUser(item.userId)">删除</button></td>
+  <tr *ngIf="data">
+    <td>{{data.username}}</td>
+    <td>{{data.id}}</td>
+    <td><button nz-button (click)="deleteUser(data.id)">删除</button></td>
   </tr>
   </tbody>
 </nz-table>

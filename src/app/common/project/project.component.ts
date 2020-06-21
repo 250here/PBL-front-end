@@ -21,6 +21,8 @@ export class ProjectComponent implements OnInit {
   groups = [];
   tasks = [];
 
+  score;
+
   groupName;
   validateAddTaskForm!: FormGroup;
   addTaskModel = {
@@ -63,6 +65,7 @@ export class ProjectComponent implements OnInit {
       this.getgroups();
       this.getDiscusses();
       this.getFiles();
+      this.getScore();
       if (this.constants.state.role == this.constants.ROLES.STUDENT) {
         this.getMyGroup();
       }
@@ -75,6 +78,20 @@ export class ProjectComponent implements OnInit {
     this.validateFileForm = this.fb.group({
       multipartFile: [null],
     });
+  }
+
+
+  getScore(){
+    this.courseService.getScore(this.projectId).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.code == '0') {
+          this.score = result.data;
+        } else {
+          this.message.error(result.message);
+        }
+      }
+    );
   }
 
   getMyGroup() {
@@ -128,6 +145,13 @@ export class ProjectComponent implements OnInit {
     );
   }
 
+  joinProject(){
+    this.courseService.joinProject(this.projectId).subscribe(
+      (result: any) => {
+        console.log(result);
+      }
+    );
+  }
   removeTask(pjTaskId) {
     this.teacherService.removeTask(pjTaskId).subscribe(
       (result: any) => {
@@ -200,6 +224,7 @@ export class ProjectComponent implements OnInit {
           this.message.success(result.message);
           this.getgroups();
           this.getMyGroup();
+          this.joinProject();
         } else {
           this.message.error(result.message);
         }
@@ -213,6 +238,7 @@ export class ProjectComponent implements OnInit {
           this.message.success(result.message);
           this.getgroups();
           this.getMyGroup();
+          this.joinProject();
         } else {
           this.message.error(result.message);
         }
@@ -236,10 +262,10 @@ export class ProjectComponent implements OnInit {
   getDiscuss(disCussId) {
     this.discussService.getDiscuss(disCussId).subscribe(
       (result: any) => {
-        console.log(result);
+        // console.log(result);
         if (result.code == '0') {
           for (let discuss of this.commentDatas) {
-            console.log(this.commentDatas);
+            // console.log(this.commentDatas);
             if (discuss.discId == result.data.discussionTheme.discId) {
               discuss.children = result.data.discussionReply;
             }

@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: "student/discuss", component: DiscussComponent },
   { path: "student/courses", component: StudentCourseComponent },
   { path: "teacher", component: TeacherComponent },
-  { path: "teacher/score", component: ScoreComponent },
+  { path: "teacher/score/:courseId/:projectId", component: ScoreComponent },
   { path: "teacher/courses", component: TeacherCourseComponent },
   { path: "student/file", component: FileComponent },
   { path: "teacher/addCourse", component: AddCourseComponent },

@@ -42,6 +42,8 @@ export class CourseInfoComponent implements OnInit {
   ) {
   }
 
+  requests = [];
+
   ngOnInit(): void {
     this.validateAddPjForm = this.fb.group({
       projectName: [null],
@@ -56,16 +58,19 @@ export class CourseInfoComponent implements OnInit {
       this.getAllProjectList();
       if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       }
+      if (this.constants.state.role == this.constants.ROLES.TEACHER) {
+        this.getRequests();
+      }
     });
 
   }
 
   getAllProjectList() {
     let obj;
-    if(this.constants.ROLES.TEACHER==this.constants.state.role){
-      obj=this.teacherService.getProjects(this.courseId);
-    }else if(this.constants.ROLES.STUDENT==this.constants.state.role){
-      obj=this.courseService.getAllProjectList(this.courseId);
+    if (this.constants.ROLES.TEACHER == this.constants.state.role) {
+      obj = this.teacherService.getProjects(this.courseId);
+    } else if (this.constants.ROLES.STUDENT == this.constants.state.role) {
+      obj = this.courseService.getAllProjectList(this.courseId);
     }
     obj.subscribe(
       (result: any) => {
@@ -104,6 +109,7 @@ export class CourseInfoComponent implements OnInit {
     );
   }
 
+
   hiddeAddProjectModel() {
     this.addProjectModel.isVisible = false;
   }
@@ -111,7 +117,8 @@ export class CourseInfoComponent implements OnInit {
   showAddProjectModel() {
     this.addProjectModel.isVisible = true;
   }
-  remove(projectId){
+
+  remove(projectId) {
     this.teacherService.removeProject(projectId).subscribe(
       (result: any) => {
         console.log(result);
@@ -124,4 +131,44 @@ export class CourseInfoComponent implements OnInit {
       }
     );
   }
+
+  getRequests() {
+    this.teacherService.getStuDropRequests(this.courseId).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.code == '0') {
+          this.requests = result.data;
+        } else {
+          this.message.create('error', result.message);
+        }
+      }
+    );
+  }
+
+  handleRequest(userId, code) {
+    this.teacherService.handleStuDropCourse(this.courseId, userId, code).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getRequests();
+        } else {
+          this.message.create('error', result.message);
+        }
+      }
+    );
+  }
+
+  stateString(code) {
+    switch (code) {
+      case '0' :
+        return '正在审核';
+      case '1' :
+        return '同意';
+      case '2' :
+        return '拒绝';
+      default:
+    }
+  }
+
 }

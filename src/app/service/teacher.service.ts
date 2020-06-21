@@ -88,4 +88,16 @@ export class TeacherService {
     const arg = courseId + '/' + userId + '/' + isAgree;
     return this.httpClient.put(this.constants.urls.TEACHER_HANDLE_REQUEST + arg, {}, httpoptions);
   }
+
+  getGradeRefData(projectId) {
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.TEACHER_GET_SCORE_INFO + projectId, httpoptions);
+  }
+
+  gradeForStu(projectId, studentId, grade) {
+    const httpoptions = this.constants.tokenOptions();
+    const arg = projectId + '/' + studentId + '/' + grade;
+    return this.httpClient.put(this.constants.urls.TEACHER_SRORE + arg, {}, httpoptions);
+  }
+
 }

@@ -1,21 +1,27 @@
 
-<nz-table #basicTable [nzData]="">
+<nz-table #basicTable [nzData]="scoreInfo">
   <thead>
   <tr>
     <th>姓名</th>
     <th>学号</th>
-    <th>成绩</th>
-    <th>评分</th>
+    <th>互评成绩</th>
+    <th>老师评分</th>
+    <th>学生参与度</th>
+    <th>该学生所在小组的任务完成情况</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
-    <td>{{data.name}}</td>
-    <td>{{data.age}}</td>
-    <td>{{data.address}}</td>
+    <td>{{data.userName}}</td>
+    <td>{{data.userId}}</td>
+    <td>{{data.stuGrade}}</td>
+    <td>{{data.teacherGrade}}</td>
+    <td>{{data.participation}}</td>
+    <td>{{data.pjTaskCompletion}}</td>
     <td>
-      <input>
-      <a>确认</a>
+      <input type="number" [(ngModel)]="data.score">
+      <a (click)="score(data.userId)"> 确认</a>
     </td>
   </tr>
   </tbody>

@@ -15,7 +15,7 @@ import {Md5} from 'ts-md5/dist/md5';
 export class UserManageComponent implements OnInit {
   userName;
   data: any = null;
-  radioValue = 'teacher';
+  radioValue ;
   user = {
     userName: '',
     password: '',

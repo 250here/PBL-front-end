@@ -18,3 +18,21 @@
     </div>
   </div>
 </nz-list>
+
+
+<nz-table #basicTable [nzData]="requests">
+  <thead>
+  <tr>
+    <th>课程编号</th>
+    <th>课程名称</th>
+    <th>申请结果</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.courseId}}</td>
+    <td>{{data.course.courseName}}</td>
+    <td>{{data.applyResult}}</td>
+  </tr>
+  </tbody>
+</nz-table>

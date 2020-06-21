@@ -147,7 +147,7 @@ export class CourseService {
     return this.httpClient.get(this.constants.urls.GET_SCORE + projectId, tokenOptions);
   }
 
-  HasEvaluated(projectId) {
+  hasEvaluated(projectId) {
     const tokenOptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.HAS_EVALUATED + projectId, tokenOptions);
   }
@@ -159,5 +159,9 @@ export class CourseService {
   addGroupTask(pjGroupTask){
     const httpoptions = this.constants.jsonTokenOptions();
     return this.httpClient.post(this.constants.urls.ADD_GROUP_TASK, pjGroupTask, httpoptions);
+  }
+  getRequestsReslut(){
+    const tokenOptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.GET_REQUESTS_RESULT , tokenOptions);
   }
 }

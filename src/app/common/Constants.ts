@@ -52,6 +52,7 @@ export class Constants {
     TAKE_COURSE: this.urlBase + 'student/course/studentInfo/takesCourse/',
     TAKEN_COURSES: this.urlBase + 'student/course/joinedCourseInfos',
     QUIT_COURSES: this.urlBase + 'student/course/studentInfo/dropCourse/',
+    GET_REQUESTS_RESULT: this.urlBase + 'student/course/studentInfo/applyCourseList',
 
     ALL_PROJECTS: this.urlBase + 'student/course/project/projectList/',
     GET_PROJECT: this.urlBase + 'student/course/project/projectInfo/',

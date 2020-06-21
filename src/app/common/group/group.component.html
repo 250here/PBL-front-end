@@ -59,7 +59,27 @@
     <nz-calendar [(ngModel)]="date" [(nzMode)]="mode" (nzPanelChange)="panelChange($event)"></nz-calendar>
   </nz-tab>
 
-  <nz-tab nzTitle="小组互评">
+  <nz-tab nzTitle="小组互评" *ngIf="myGroup&&constants.ROLES.STUDENT==constants.state.role
+  &&hasEvaluated=='0'">
+    <nz-table #evaluateTable [nzData]="myGroup.groupMembers">
+      <thead>
+      <tr>
+        <th>学生编号</th>
+        <th>学生姓名</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let member of evaluateTable.data">
+        <td>{{member.id}}</td>
+        <td>{{member.username}}</td>
+        <td>
+          <input type="number" [(ngModel)]="member.score" >
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+    <button nz-button (click)="evaluate()">提交</button>
   </nz-tab>
 
   </nz-tabset>

@@ -4,7 +4,7 @@ import {NzCalendarMode, NzMessageService} from 'ng-zorro-antd';
 import {TeacherService} from '../../service/teacher.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Constants} from '../Constants';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-group',
@@ -35,6 +35,10 @@ export class GroupComponent implements OnInit {
   projectList: any;
   pjTaskList: any;
   validateAddTaskForm!: FormGroup;
+
+  myGroup: any = null;
+  hasEvaluated;
+
   constructor(
     private courseService: CourseService,
     private teacherService: TeacherService,
@@ -53,12 +57,69 @@ export class GroupComponent implements OnInit {
       this.groupId = +params.get('groupId');
       // this.getPjGroupTaskInfo();
       this.getPjTask();
+      this.getMyGroup();
+      this.getHasEvaluated();
     });
     this.validateAddTaskForm = this.fb.group({
       taskName: [null],
       rangePickerTime: [[]],
       taskDiscribe: [null],
     });
+  }
+
+  getMyGroup() {
+    this.courseService.getMyPjGroupInfo(this.projectId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.myGroup = result.data;
+          console.log(this.myGroup);
+        } else {
+          this.message.error(result.message);
+        }
+      }
+    );
+  }
+
+  getHasEvaluated() {
+    this.courseService.hasEvaluated(this.projectId).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.code == '0') {
+          this.hasEvaluated = result.data;
+        } else {
+          this.message.error(result.message);
+        }
+      }
+    );
+  }
+
+  evaluate() {
+    let postData = {
+      projectId: this.projectId,
+      groupId: this.groupId,
+      stuEvaluates: [],
+    };
+    for (const member of this.myGroup.groupMembers) {
+      if (member.score) {
+        postData.stuEvaluates.push({
+          userId: member.id,
+          grade: member.score,
+        });
+      } else {
+        this.message.error('请填写全部互评结果');
+        return;
+      }
+    }
+    this.courseService.evaluateEachOther(postData).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getHasEvaluated();
+        } else {
+          this.message.error(result.message);
+        }
+      }
+    );
   }
 
   getProjectList() {
@@ -87,9 +148,9 @@ export class GroupComponent implements OnInit {
           this.pjTaskList = result.data;
           this.resultList = result.data;
           for (let pjTask of this.resultList) {
-            this.courseService.getPjGroupTaskInfo(pjTask.taskId , this.groupId)
+            this.courseService.getPjGroupTaskInfo(pjTask.taskId, this.groupId)
               .subscribe(
-                (result : any) => {
+                (result: any) => {
                   pjTask.groupTask = result.data;
                   console.log(pjTask);
                 }
@@ -126,13 +187,16 @@ export class GroupComponent implements OnInit {
   panelChange(change: { date: Date; mode: string }): void {
     console.log(change.date, change.mode);
   }
+
   hiddeAddTaskModel() {
     this.addTaskModel.isVisible = false;
   }
+
   showAddTaskModel(projectTaskId) {
     this.addTaskModel.isVisible = true;
     this.projectTaskId = projectTaskId;
   }
+
   addTask() {
     for (const i in this.validateAddTaskForm.controls) {
       this.validateAddTaskForm.controls[i].markAsDirty();

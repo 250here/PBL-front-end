@@ -337,7 +337,7 @@ export class ProjectComponent implements OnInit {
     console.log(datas);
     const form: any = document.getElementById('fileForm');
     let formData = new FormData(form);
-    // console.log(form);
+    console.log(form);
     // console.log(formData.get('file'));
     formData.set('courseId', this.courseId);
     formData.set('projectId', this.projectId);

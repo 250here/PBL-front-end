@@ -1,49 +1,97 @@
 <br>
-<nz-table #basicTable [nzData]="projectList">
-  <thead>
-  <tr>
-    <th>项目ID</th>
-    <th>项目名</th>
-    <th>项目日期</th>
-    <th>项目描述</th>
-    <th>评分时间</th>
-    <th>评分占比</th>
-    <th>查看任务</th>
-    <th>删除项目</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of projectList">
-    <td>{{item.projectId}}</td>
-    <td>{{item.projectName}}</td>
-    <td>{{item.startTime}}--{{item.endTime}}</td>
-    <td>{{item.projectDsc}}</td>
-    <td>{{item.evaluationTime}}</td>
-    <td>老师：{{item.teacherEvaWeight}}，学生：{{item.stuEvaWeight}}</td>
-    <td><button nz-button (click)="getPjTask(item.projectId)">查看任务</button></td>
-    <td><button nz-button (click)="removeProject(item.projectId)">删除项目</button></td>
-  </tr>
-  </tbody>
-</nz-table>
-<br>
+<nz-tabset>
+<!--    <nz-tab nzTitle="小组任务">-->
+<!--<nz-table #basicTable [nzData]=" pjGroupTaskList">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>任务ID</th>-->
+<!--    <th>任务名</th>-->
+<!--    <th>任务日期</th>-->
+<!--    <th>任务描述</th>-->
+<!--    <th>完成</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let item of pjGroupTaskList">-->
+<!--    <td>{{item.taskId}}</td>-->
+<!--    <td>{{item.taskName}}</td>-->
+<!--    <td>{{item.taskStartTime}}&#45;&#45;{{item.taskEndTime}}</td>-->
+<!--    <td>{{item.taskDiscribe}}</td>-->
+<!--    <td><button nz-button>完成任务</button></td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</nz-table>-->
+<!--    </nz-tab>-->
 
-<nz-table #basicTable [nzData]=" pjTaskList">
-  <thead>
-  <tr>
-    <th>任务ID</th>
-    <th>任务名</th>
-    <th>任务日期</th>
-    <th>任务描述</th>
-    <th>完成</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of pjTaskList">
-    <td>{{item.taskId}}</td>
-    <td>{{item.taskName}}</td>
-    <td>{{item.taskStartTime}}--{{item.taskEndTime}}</td>
-    <td>{{item.taskDiscribe}}</td>
-    <td><button nz-button (click)="finishPjGroupTask(item)">完成任务</button></td>
-  </tr>
-  </tbody>
-</nz-table>
+  <nz-tab nzTitle="教师任务">
+    <nz-collapse>
+      <nz-collapse-panel *ngFor="let panel of resultList" [nzHeader]="panel.taskName" >
+
+        <a (click)="showAddTaskModel(panel.taskId)">创建任务</a>
+
+        <p style="margin:0;">
+          <nz-table #basicTable>
+            <thead>
+            <tr>
+              <th>任务ID</th>
+              <th>任务名</th>
+              <th>任务日期</th>
+              <th>任务描述</th>
+              <th>完成</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of panel.groupTask">
+              <td>{{item.taskId}}</td>
+              <td>{{item.taskName}}</td>
+              <td>{{item.taskStartTime}}--{{item.taskEndTime}}</td>
+              <td>{{item.taskDiscribe}}</td>
+              <td><button nz-button *ngIf = "item.isFinished == '0'" (click)="finishPjGroupTask(item.projectTaskId,item.groupId,item.taskId)">完成任务</button></td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </p>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </nz-tab>
+
+  <nz-tab nzTitle="查看时间表">
+    <nz-calendar [(ngModel)]="date" [(nzMode)]="mode" (nzPanelChange)="panelChange($event)"></nz-calendar>
+  </nz-tab>
+
+  <nz-tab nzTitle="小组互评">
+  </nz-tab>
+
+  </nz-tabset>
+<nz-modal [(nzVisible)]="addTaskModel.isVisible" nzTitle="添加任务" (nzOnCancel)="hiddeAddTaskModel()">
+
+
+  <form nz-form [formGroup]="validateAddTaskForm" (ngSubmit)="addTask()">
+    <nz-form-item>
+      <nz-form-label nzRequired>名称</nz-form-label>
+      <nz-form-control>
+        <input formControlName="taskName" [(ngModel)]="addTaskModel.task.taskName" nz-input placeholder="项目名称"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired> 起止时间</nz-form-label>
+      <nz-form-control>
+        <nz-range-picker nzShowTime formControlName="rangePickerTime"></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzRequired>描述</nz-form-label>
+      <nz-form-control>
+        <input formControlName="taskDiscribe" [(ngModel)]="addTaskModel.task.taskDiscribe" nz-input placeholder="项目描述"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

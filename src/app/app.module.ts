@@ -70,7 +70,9 @@ registerLocaleData(zh);
     UserinfoComponent,
     CourseInfoComponent,
     ProjectComponent,
-
+    GroupComponent,
+    ProjectComponent,
+    GradeComponent,
   ],
   imports: [
     BrowserModule,

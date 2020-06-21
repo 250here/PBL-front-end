@@ -66,8 +66,7 @@
       </tr>
       </tbody>
     </nz-table>
-    <nz-modal [(nzVisible)]="addTaskModel.isVisible" nzTitle="添加任务" (nzOnCancel)="hiddeAddTaskModel()"
-    >
+    <nz-modal [(nzVisible)]="addTaskModel.isVisible" nzTitle="添加任务" (nzOnCancel)="hiddeAddTaskModel()">
       <form nz-form [formGroup]="validateAddTaskForm" (ngSubmit)="addTask()">
 
 

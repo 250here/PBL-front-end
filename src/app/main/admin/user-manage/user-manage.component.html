@@ -31,11 +31,11 @@
 </form>
 <br>
 
-<nz-input-group style="width:300px;" nzSearch nzSize="large" nzPrefixIcon="search">
+<nz-input-group style="width:300px;" nzSearch nzSize="large" >
   <input [(ngModel)]="userName" type="text" nz-input placeholder="input search text"/>
-<!--  <nz-input-group nzPrefixIcon="search">-->
+  <nz-input-group nzPrefixIcon="search">
     <button nz-button nzType="primary" nzSize="small" nzSearch (click)="searchUser()" >Search</button>
-<!--  </nz-input-group>-->
+  </nz-input-group>
 </nz-input-group>
 <br>
 <nz-table #basicTable [nzData]="data">

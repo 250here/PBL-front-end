@@ -126,7 +126,7 @@ export class CourseService {
 
   getPjGroupTaskInfo(projectTaskId, groupId) {
     const tokenOptions = this.constants.tokenOptions();
-    return this.httpClient.get(this.constants.urls.STASK_LIST + projectTaskId + '/' + groupId, tokenOptions);
+    return this.httpClient.get(this.constants.urls.REMOVE_STASK + projectTaskId + '/' + groupId, tokenOptions);
   }
 
   deletePjGroupTask(projectTaskId, groupId, groupTaskId, isFinished) {
@@ -155,5 +155,9 @@ export class CourseService {
   evaluateEachOther(data) {
     const tokenOptions = this.constants.jsonTokenOptions();
     return this.httpClient.post(this.constants.urls.EVALUATE_EACH_OTHER, data, tokenOptions);
+  }
+  addGroupTask(pjGroupTask){
+    const httpoptions = this.constants.jsonTokenOptions();
+    return this.httpClient.post(this.constants.urls.ADD_GROUP_TASK, pjGroupTask, httpoptions);
   }
 }

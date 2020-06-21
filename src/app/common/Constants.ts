@@ -82,8 +82,9 @@ export class Constants {
     GET_TASK_OF_COURSE: this.urlBase + 'teacher/course/project/projectList/',
 
     GET_GRADE_OF_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/PjScore/',
-    IS_EVALUATED: this.urlBase + 'student/course/project/studentPjInfo/isEvaluated/1',
+    IS_EVALUATED: this.urlBase + 'student/course/project/studentPjInfo/isEvaluated/',
     TEACHER_UPDATE_GRADE: this.urlBase + 'gradeData/',
+    ADD_GROUP_TASK: this.urlBase + 'student/course/project/pjGroupTask',
   };
   ROLES = {
     ADMIN: 'ROLE_ADMIN',

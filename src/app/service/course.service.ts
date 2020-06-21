@@ -142,4 +142,18 @@ export class CourseService {
       .put(this.constants.urls.FINISH_STASK + arg, {}, tokenOptions);
   }
 
+  getScore(projectId) {
+    const tokenOptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.GET_SCORE + projectId, tokenOptions);
+  }
+
+  HasEvaluated(projectId) {
+    const tokenOptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.HAS_EVALUATED + projectId, tokenOptions);
+  }
+
+  evaluateEachOther(data) {
+    const tokenOptions = this.constants.jsonTokenOptions();
+    return this.httpClient.post(this.constants.urls.EVALUATE_EACH_OTHER, data, tokenOptions);
+  }
 }

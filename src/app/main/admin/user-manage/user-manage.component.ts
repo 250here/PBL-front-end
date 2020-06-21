@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../../service/user.service';
 import {Constants} from '../../../common/Constants';
 import {Router} from '@angular/router';
 import {TeacherService} from '../../../service/teacher.service';
 import {NzMessageService} from 'ng-zorro-antd';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-user-manage',
@@ -13,7 +14,7 @@ import {NzMessageService} from 'ng-zorro-antd';
 })
 export class UserManageComponent implements OnInit {
   userName;
-  data: any;
+  data: any = null;
   radioValue = 'teacher';
   user = {
     userName: '',
@@ -22,13 +23,15 @@ export class UserManageComponent implements OnInit {
   };
   validateForm!: FormGroup;
   dataSet: any;
+
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
     public constants: Constants,
     private router: Router,
     private message: NzMessageService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -37,18 +40,24 @@ export class UserManageComponent implements OnInit {
       userId: [null],
     });
   }
-  addUser(){
+
+  addUser() {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    if (this.validateForm.invalid){
+    if (this.validateForm.invalid) {
       return;
     }
     let datas: any = this.validateForm.getRawValue();
     console.log(datas);
-    if (this.radioValue == 'teacher'){
-      this.userService.addTeacher(this.user)
+    const newUser = {
+      username: this.user.userName,
+      password: Md5.hashStr(this.user.password),
+      id: this.user.userId,
+    };
+    if (this.radioValue == 'teacher') {
+      this.userService.addTeacher(newUser)
         .subscribe((result: any) => {
           console.log(result);
           if (result.code == '0') {
@@ -58,8 +67,8 @@ export class UserManageComponent implements OnInit {
           }
         });
     }
-    if (this.radioValue === 'student'){
-      this.userService.addStudent(this.user)
+    if (this.radioValue == 'student') {
+      this.userService.addStudent(newUser)
         .subscribe((result: any) => {
           console.log(result);
           if (result.code == '0') {
@@ -70,7 +79,8 @@ export class UserManageComponent implements OnInit {
         });
     }
   }
-  searchUser(){
+
+  searchUser() {
     this.userService.searchUser(this.userName)
       .subscribe(
         (result: any) => {
@@ -79,12 +89,14 @@ export class UserManageComponent implements OnInit {
         }
       );
   }
-  deleteUser(userId: string ){
+
+  deleteUser(userId: string) {
     this.userService.deleteUser(userId)
       .subscribe((result: any) => {
-        if (result.code == '0'){
-          this.message.success("删除成功");
-        }else {
+        if (result.code == '0') {
+          this.message.success('删除成功');
+          this.data=null;
+        } else {
           this.message.error(result.message);
         }
       });

@@ -209,4 +209,22 @@
     </nz-table>
 
   </nz-tab>
+  <nz-tab *ngIf="constants.ROLES.STUDENT==constants.state.role&&score!=null" nzTitle="得分">
+    <nz-table  >
+      <thead>
+      <tr>
+        <th>最终得分</th>
+        <th>互评成绩</th>
+        <th>老师评分</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr >
+        <td>{{score.totalScore}}</td>
+        <td>{{score.stuGrade}}</td>
+        <td>{{score.teacherGrade}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
 </nz-tabset>

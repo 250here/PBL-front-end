@@ -13,10 +13,10 @@ export class Constants {
     ADD_COURSE_URL: this.urlBase + 'teacher/course/courseInfo',
 
     ADD_TASK_URL: this.urlBase + 'teacher/course/project/projectInfo',
-    ADD_TEACHER_URL: this.urlBase + '/admin/teacherInfo',
-    ADD_STUDENT_URL: this.urlBase + '/admin/studentInfo',
-    SEARCH_USER: this.urlBase + '/userInfo/',
-    DELETE_USER: this.urlBase + '/userInfo/',
+    ADD_TEACHER_URL: this.urlBase + 'admin/teacherInfo',
+    ADD_STUDENT_URL: this.urlBase + 'admin/studentInfo',
+    SEARCH_USER: this.urlBase + 'userInfo/',
+    DELETE_USER: this.urlBase + 'userInfo/',
 
     ADD_PROJECT_URL: this.urlBase + 'teacher/course/project/projectInfo',
     GET_PROJECTS: this.urlBase + 'teacher/course/project/projectList/',
@@ -70,6 +70,10 @@ export class Constants {
     GETCOURSES: this.urlBase + 'teacher/course/courseList/',
     DELETE_COURSE: this.urlBase + 'teacher/course/courseInfo/',
     GET_TASK_OF_COURSE: this.urlBase + 'teacher/course/project/projectList/',
+
+    GET_GRADE_OF_PROJECT: this.urlBase + 'student/course/project/studentPjInfo/PjScore/',
+    IS_EVALUATED: this.urlBase + 'student/course/project/studentPjInfo/isEvaluated/1',
+    TEACHER_UPDATE_GRADE: this.urlBase + 'gradeData/',
   };
   ROLES = {
     ADMIN: 'ROLE_ADMIN',

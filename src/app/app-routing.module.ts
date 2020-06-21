@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: "teacher/addCourse", component: AddCourseComponent },
   { path: "courseInfo/:courseId", component: CourseInfoComponent },
   { path: "projectInfo/:courseId/:projectId", component: ProjectComponent },
+  { path: "student/task", component: TaskComponent },
 ];
 
 @NgModule({

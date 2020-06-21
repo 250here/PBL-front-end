@@ -1,0 +1,49 @@
+<br>
+<nz-table #basicTable [nzData]="projectList">
+  <thead>
+  <tr>
+    <th>项目ID</th>
+    <th>项目名</th>
+    <th>项目日期</th>
+    <th>项目描述</th>
+    <th>评分时间</th>
+    <th>评分占比</th>
+    <th>查看任务</th>
+    <th>删除项目</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of projectList">
+    <td>{{item.projectId}}</td>
+    <td>{{item.projectName}}</td>
+    <td>{{item.startTime}}--{{item.endTime}}</td>
+    <td>{{item.projectDsc}}</td>
+    <td>{{item.evaluationTime}}</td>
+    <td>老师：{{item.teacherEvaWeight}}，学生：{{item.stuEvaWeight}}</td>
+    <td><button nz-button (click)="getPjTask(item.projectId)">查看任务</button></td>
+    <td><button nz-button (click)="removeProject(item.projectId)">删除项目</button></td>
+  </tr>
+  </tbody>
+</nz-table>
+<br>
+
+<nz-table #basicTable [nzData]=" pjTaskList">
+  <thead>
+  <tr>
+    <th>任务ID</th>
+    <th>任务名</th>
+    <th>任务日期</th>
+    <th>任务描述</th>
+    <th>完成</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of pjTaskList">
+    <td>{{item.taskId}}</td>
+    <td>{{item.taskName}}</td>
+    <td>{{item.taskStartTime}}--{{item.taskEndTime}}</td>
+    <td>{{item.taskDiscribe}}</td>
+    <td><button nz-button (click)="finishPjGroupTask(item)">完成任务</button></td>
+  </tr>
+  </tbody>
+</nz-table>

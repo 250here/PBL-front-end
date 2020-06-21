@@ -29,7 +29,7 @@ export class TeacherService {
     const tokenOptions = this.constants.tokenOptions();
     return this.httpClient.post(this.constants.urls.DELETE_COURSE + courseId, {}, tokenOptions);
   }
-  // getStudents(){
+
   addProject(project: any) {
     let httpoptions = this.constants.jsonTokenOptions();
     console.log(this.constants.urls.ADD_PROJECT_URL);
@@ -49,6 +49,9 @@ export class TeacherService {
   removeProject(projectId){
     let httpoptions = this.constants.tokenOptions();
     return this.httpClient.delete(this.constants.urls.TEACHER_REMOVE_PROJECT + projectId, httpoptions);
-
+  }
+  updateGrade(projectId, studentId, grade){
+    let httpoptions = this.constants.tokenOptions();
+    return this.httpClient.put(this.constants.urls.TEACHER_UPDATE_GRADE + projectId + '/' + studentId + '/' + grade, httpoptions);
   }
 }

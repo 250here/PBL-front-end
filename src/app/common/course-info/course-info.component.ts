@@ -96,6 +96,7 @@ export class CourseInfoComponent implements OnInit {
         if (result.code == '0') {
           this.message.create('success', result.message);
           this.hiddeAddProjectModel();
+          this.getAllProjectList();
         } else {
           this.message.create('error', result.message);
         }
@@ -116,6 +117,7 @@ export class CourseInfoComponent implements OnInit {
         console.log(result);
         if (result.code == '0') {
           this.message.create('success', result.message);
+          this.getAllProjectList();
         } else {
           this.message.create('error', result.message);
         }

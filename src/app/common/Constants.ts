@@ -22,6 +22,12 @@ export class Constants {
     GET_PROJECTS: this.urlBase + 'teacher/course/project/projectList/',
     TEACHER_GET_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
     TEACHER_REMOVE_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
+    TEACHER_GET_GROUPS: this.urlBase + 'teacher/course/project/pjGroupList/',
+    TEACHER_GET_GROUP: this.urlBase + 'teacher/course/project/pjGroupInfo/',
+    TEACHER_CREATE_TASK: this.urlBase + 'teacher/course/project/pjTask',
+    TEACHER_GET_TASKs: this.urlBase + 'teacher/course/project/pjTaskList/',
+    TEACHER_GET_TASK: this.urlBase + 'teacher/course/project/pjTaskInfo/',
+    TEACHER_REMOVE_TASK: this.urlBase + 'teacher/course/project/pjTaskInfo/',
 
 
     UPLOAD_PHOTO: this.urlBase + 'user/userProfilePic',
@@ -59,7 +65,7 @@ export class Constants {
     STASK_LIST: this.urlBase + '/student/course/project/pjGroupTaskList/',
     REMOVE_STASK: this.urlBase + '/student/course/project/pjGroupTaskInfo/',
     FINISH_STASK: this.urlBase + '/student/course/project/pjGroupTaskFinished/',
-    // TASK_FROM_TEACHER_LIST: this.urlBase + '/student/course/project/',
+    STASK_INFO: this.urlBase + '/student/course/project/pjGroupTaskInfo/',
 
     GETCOURSES: this.urlBase + 'teacher/course/courseList/',
     DELETE_COURSE: this.urlBase + 'teacher/course/courseInfo/',

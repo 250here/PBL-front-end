@@ -5,6 +5,9 @@ import {Constants} from '../Constants';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {TeacherService} from '../../service/teacher.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {DiscussService} from '../../service/discuss.service';
+import {ProjectFileService} from '../../service/project-file.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project',
@@ -30,6 +33,15 @@ export class ProjectComponent implements OnInit {
     },
   };
 
+  commentDatas: any = [];
+  commentInput: any = '';
+
+
+  files: any = {};
+
+  validateFileForm!: FormGroup;
+  fileUpload;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,6 +50,8 @@ export class ProjectComponent implements OnInit {
     private message: NzMessageService,
     private teacherService: TeacherService,
     private fb: FormBuilder,
+    private discussService: DiscussService,
+    private projectFileService: ProjectFileService,
   ) {
   }
 
@@ -47,6 +61,8 @@ export class ProjectComponent implements OnInit {
       this.projectId = +params.get('projectId');
       this.getAllTasks();
       this.getgroups();
+      this.getDiscusses();
+      this.getFiles();
       if (this.constants.state.role == this.constants.ROLES.STUDENT) {
         this.getMyGroup();
       }
@@ -55,6 +71,9 @@ export class ProjectComponent implements OnInit {
       taskName: [null],
       rangePickerTime: [[]],
       taskDiscribe: [null],
+    });
+    this.validateFileForm = this.fb.group({
+      multipartFile: [null],
     });
   }
 
@@ -75,7 +94,7 @@ export class ProjectComponent implements OnInit {
     if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       obj = this.courseService.getAllPjGroupList(this.projectId);
     } else if (this.constants.state.role == this.constants.ROLES.TEACHER) {
-      obj = this.courseService.getAllPjGroupList(this.projectId);
+      obj = this.teacherService.getAllPjGroupList(this.projectId);
     }
     obj.subscribe(
       (result: any) => {
@@ -94,7 +113,7 @@ export class ProjectComponent implements OnInit {
     if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       obj = this.courseService.getPjTaskList(this.projectId);
     } else if (this.constants.state.role == this.constants.ROLES.TEACHER) {
-      obj = this.courseService.getPjTaskList(this.projectId);
+      obj = this.teacherService.getPjTaskList(this.projectId);
     }
     obj.subscribe(
       (result: any) => {
@@ -175,14 +194,149 @@ export class ProjectComponent implements OnInit {
       this.message.error('小组名称不能为空');
       return;
     }
-    this.courseService.createPjGroup(this.projectId, this.groupName).subscribe((result: any) => {
-      if (result.code == '0') {
-        this.message.success(result.message);
-        this.getgroups();
-        this.getMyGroup();
-      } else {
-        this.message.error(result.message);
-      }
-    });
+    this.courseService.createPjGroup(this.projectId, this.groupName).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getgroups();
+          this.getMyGroup();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  getDiscusses() {
+    this.discussService.getDiscusses(this.projectId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.commentDatas = result.data;
+          for (let discuss of result.data) {
+            this.getDiscuss(discuss.discId);
+          }
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  getDiscuss(disCussId) {
+    this.discussService.getDiscuss(disCussId).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.code == '0') {
+          for (let discuss of this.commentDatas) {
+            console.log(this.commentDatas);
+            if (discuss.discId == result.data.discussionTheme.discId) {
+              discuss.children = result.data.discussionReply;
+            }
+          }
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  addReply(discussId) {
+    const reply = {
+      discId: discussId,
+      pjId: this.projectId,
+      discMessage: this.commentInput,
+    };
+    this.discussService.replyDiscuss(reply).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getDiscusses();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  addDiscuss() {
+    const discuss = {
+      pjId: this.projectId,
+      discMessage: this.commentInput,
+      discTitle: 'no title',
+    };
+    this.discussService.newDiscuss(discuss).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getDiscusses();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  clearInput() {
+    this.commentInput = '';
+  }
+
+  getFiles() {
+    this.projectFileService.getSharedFiles(this.projectId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.files = result.data;
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  upload() {
+    for (const i in this.validateFileForm.controls) {
+      this.validateFileForm.controls[i].markAsDirty();
+      this.validateFileForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateFileForm.invalid) {
+      return false;
+    }
+    let datas: any = this.validateFileForm.getRawValue();
+    console.log(datas);
+    const form: any = document.getElementById('fileForm');
+    let formData = new FormData(form);
+    // console.log(form);
+    // console.log(formData.get('file'));
+    formData.set('courseId', this.courseId);
+    formData.set('projectId', this.projectId);
+    this.projectFileService.uploadFile(formData).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getFiles();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+  removeFile(fileId){
+    this.projectFileService.deleteSharedFile(fileId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getFiles();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+  download(fileId, fileName){
+    window.location.href=this.constants.urls.DOWNLOAD_FILE + fileId;
+    // this.projectFileService.downloadSharedFile(fileId)
+    //   .pipe(
+    //     map((data: any) => {
+    //   console.log(data);
+    //   const link = document.createElement('a');
+    //   const blob = new Blob([data] );
+    //   link.setAttribute('href', window.URL.createObjectURL(blob));
+    //   link.setAttribute('download', fileName);
+    //   link.style.visibility = 'hidden';
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   document.body.removeChild(link);
+    // })).subscribe();
   }
 }

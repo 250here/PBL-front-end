@@ -30,7 +30,7 @@ export class CourseService {
     return this.httpClient.post(this.constants.urls.ADD_COURSE_URL, task, httpoptions);
   }
 
-  getTask(courseId){
+  getTask(courseId) {
     const httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.GET_TASK_OF_COURSE + courseId, httpoptions);
   }
@@ -124,6 +124,11 @@ export class CourseService {
     return this.httpClient.get(this.constants.urls.STASK_LIST + groupId, tokenOptions);
   }
 
+  getPjGroupTaskInfo(projectTaskId, groupId) {
+    const tokenOptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.STASK_LIST + projectTaskId + '/' + groupId, tokenOptions);
+  }
+
   deletePjGroupTask(projectTaskId, groupId, groupTaskId, isFinished) {
     const tokenOptions = this.constants.tokenOptions();
     const arg = '' + projectTaskId + '/' + groupId + '/' + groupTaskId + '/' + isFinished;
@@ -136,4 +141,5 @@ export class CourseService {
     return this.httpClient
       .put(this.constants.urls.FINISH_STASK + arg, {}, tokenOptions);
   }
+
 }

@@ -6,7 +6,7 @@
           <nz-card style="width:300px;" [nzBordered]="false" nzTitle="课程">
             <p>课程名称:{{item.courseName}}</p>
             <p>教师id：{{item.teacherId}}</p>
-            <p><button nz-button>查看项目</button></p>
+            <p><button nz-button routerLink="/courseInfo/{{item.courseId}}">查看项目</button></p>
             <p><button nz-button (click)="deleteCourse(item.courseId)">删除课程</button></p>
           </nz-card>
         </div>

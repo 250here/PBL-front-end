@@ -21,6 +21,9 @@
         <td>{{data.groupName}}</td>
         <td>{{data.groupHeaderId}}</td>
         <td>
+          <a *ngIf="myGroup==null&&constants.state.role==constants.ROLES.STUDENT" (click)="joinGroup(data.groupId)">
+            加入
+          </a>
           <a *ngIf="constants.state.role==constants.ROLES.STUDENT"
              routerLink="/groupInfo/{{courseId}}/{{projectId}}/{{data.groupId}}">查看</a>
           <a *ngIf="constants.state.role==constants.ROLES.STUDENT

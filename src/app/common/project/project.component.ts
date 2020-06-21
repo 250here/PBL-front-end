@@ -206,6 +206,19 @@ export class ProjectComponent implements OnInit {
       });
   }
 
+  joinGroup(groupId){
+    this.courseService.joinPjGroup(this.projectId,groupId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getgroups();
+          this.getMyGroup();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
   getDiscusses() {
     this.discussService.getDiscusses(this.projectId).subscribe(
       (result: any) => {

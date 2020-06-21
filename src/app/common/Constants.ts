@@ -22,6 +22,8 @@ export class Constants {
     GET_PROJECTS: this.urlBase + 'teacher/course/project/projectList/',
     TEACHER_GET_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
     TEACHER_REMOVE_PROJECT: this.urlBase + 'teacher/course/project/projectInfo/',
+    TEACHER_HANDLE_REQUEST: this.urlBase + 'teacher/course/dropCourseInfo/',
+
     TEACHER_GET_GROUPS: this.urlBase + 'teacher/course/project/pjGroupList/',
     TEACHER_GET_GROUP: this.urlBase + 'teacher/course/project/pjGroupInfo/',
     TEACHER_CREATE_TASK: this.urlBase + 'teacher/course/project/pjTask',

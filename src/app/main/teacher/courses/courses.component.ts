@@ -17,6 +17,7 @@ export class CoursesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getCourses();
   }
 
   getCourses(){
@@ -32,6 +33,7 @@ export class CoursesComponent implements OnInit {
         (result: any) => {
           if (result.code == '0'){
             this.message.success("删除课程成功");
+            this.getCourses();
           }else {
             this.message.error(result.message);
           }

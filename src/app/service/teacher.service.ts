@@ -20,15 +20,16 @@ export class TeacherService {
     return this.httpClient.post(this.constants.urls.ADD_COURSE_URL, course, httpoptions);
   }
 
-  getCourses(){
+  getCourses() {
     const httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.GETCOURSES, httpoptions);
   }
 
-  deleteCourse(courseId){
+  deleteCourse(courseId) {
     const tokenOptions = this.constants.tokenOptions();
-    return this.httpClient.post(this.constants.urls.DELETE_COURSE + courseId, {}, tokenOptions);
+    return this.httpClient.delete(this.constants.urls.DELETE_COURSE + courseId, tokenOptions);
   }
+
   // getStudents(){
   addProject(project: any) {
     let httpoptions = this.constants.jsonTokenOptions();
@@ -42,38 +43,55 @@ export class TeacherService {
     return this.httpClient.get(this.constants.urls.GET_PROJECTS + courseId, httpoptions);
   }
 
-  getProject(projectId){
+  getProject(projectId) {
     let httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.TEACHER_GET_PROJECT + projectId, httpoptions);
   }
-  removeProject(projectId){
+
+  removeProject(projectId) {
     let httpoptions = this.constants.tokenOptions();
     return this.httpClient.delete(this.constants.urls.TEACHER_REMOVE_PROJECT + projectId, httpoptions);
 
   }
-  getAllPjGroupList(projectId){
+
+  getAllPjGroupList(projectId) {
     let httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.TEACHER_GET_GROUPS + projectId, httpoptions);
   }
-  getPjGroupInfo(groupId){
+
+  getPjGroupInfo(groupId) {
     let httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.TEACHER_GET_GROUP + groupId, httpoptions);
   }
-  createTask(pjTask){
+
+  createTask(pjTask) {
     const httpoptions = this.constants.jsonTokenOptions();
     return this.httpClient.post(this.constants.urls.TEACHER_CREATE_TASK, pjTask, httpoptions);
   }
-  getPjTaskList(projectId){
+
+  getPjTaskList(projectId) {
     const httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.TEACHER_GET_TASKs + projectId, httpoptions);
   }
 
-  getPjTaskInfo(pjTaskId){
+  getPjTaskInfo(pjTaskId) {
     const httpoptions = this.constants.tokenOptions();
     return this.httpClient.get(this.constants.urls.TEACHER_GET_TASK + pjTaskId, httpoptions);
   }
-  removeTask(pjTaskId){
+
+  removeTask(pjTaskId) {
     const httpoptions = this.constants.tokenOptions();
     return this.httpClient.delete(this.constants.urls.TEACHER_REMOVE_TASK + pjTaskId, httpoptions);
+  }
+
+  getStuDropRequests(courseId) {
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urlBase + 'teacher/course/' + courseId + '/stuDropRequests', httpoptions);
+  }
+
+  handleStuDropCourse(courseId, userId, isAgree) {
+    const httpoptions = this.constants.tokenOptions();
+    const arg = courseId + '/' + userId + '/' + isAgree;
+    return this.httpClient.put(this.constants.urls.TEACHER_HANDLE_REQUEST + arg, {}, httpoptions);
   }
 }

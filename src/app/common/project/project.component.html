@@ -18,15 +18,15 @@
     <td>{{data.groupName}}</td>
     <td>{{data.groupHeaderId}}</td>
     <td>
-      <a routerLink="/groupInfo/{{courseId}}/{{projectId}}/{{data.groupId}}">查看</a>
+      <a *ngIf="constants.state.role==constants.ROLES.STUDENT" routerLink="/groupInfo/{{courseId}}/{{projectId}}/{{data.groupId}}">查看</a>
       <a *ngIf="constants.state.role==constants.ROLES.STUDENT
-      &&myGroup!=null&&myGroup.groupId==data.groupId" (click)="quitGroup(data.groupId)" )>退出</a>
+      &&myGroup!=null&&myGroup.groupId==data.groupId" (click)="quitGroup(data.groupId)" >退出</a>
     </td>
   </tr>
   </tbody>
 </nz-table>
 <a *ngIf="constants.state.role==constants.ROLES.TEACHER" (click)="showAddTaskModel()">创建任务</a>
-<nz-table #basicTable [nzData]="tasks">
+<nz-table #taskstable [nzData]="tasks">
   <thead>
   <tr>
     <th>编号</th>
@@ -38,7 +38,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data">
+  <tr *ngFor="let data of taskstable.data">
     <td>{{data.taskId}}</td>
     <td>{{data.taskName}}</td>
     <td>{{data.taskDiscribe}}</td>
@@ -46,7 +46,7 @@
     <td>{{data.taskEndTime}}</td>
     <td>
       <a *ngIf="constants.state.role==constants.ROLES.TEACHER"
-         (click)="removeTask(data.taskId)" )>删除</a>
+         (click)="removeTask(data.taskId)">删除</a>
     </td>
     <!--    <td>-->
     <!--      <a routerLink="/groupInfo/{{courseId}}/{{projectId}}/{{data.groupId}}">查看</a>-->

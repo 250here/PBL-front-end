@@ -22,6 +22,7 @@ export class ProjectComponent implements OnInit {
   validateAddTaskForm!: FormGroup;
   addTaskModel = {
     isVisible: false, task: {
+      projectId: '',
       taskName: '',
       taskStartTime: null,
       taskEndTime: null,
@@ -44,6 +45,8 @@ export class ProjectComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.courseId = +params.get('courseId');
       this.projectId = +params.get('projectId');
+      this.getAllTasks();
+      this.getgroups();
       if (this.constants.state.role == this.constants.ROLES.STUDENT) {
         this.getMyGroup();
       }
@@ -95,8 +98,10 @@ export class ProjectComponent implements OnInit {
     }
     obj.subscribe(
       (result: any) => {
+        // console.log(result);
         if (result.code == '0') {
           this.tasks = result.data;
+          console.log(this.tasks);
         } else {
           this.message.error(result.message);
         }
@@ -109,6 +114,7 @@ export class ProjectComponent implements OnInit {
       (result: any) => {
         if (result.code == '0') {
           this.message.success(result.message);
+          this.getAllTasks();
         } else {
           this.message.error(result.message);
         }
@@ -121,6 +127,8 @@ export class ProjectComponent implements OnInit {
       (result: any) => {
         if (result.code == '0') {
           this.message.success(result.message);
+          this.getgroups();
+          this.getMyGroup();
         } else {
           this.message.error(result.message);
         }
@@ -146,6 +154,7 @@ export class ProjectComponent implements OnInit {
     }
     let datas: any = this.validateAddTaskForm.getRawValue();
     this.addTaskModel.task.taskStartTime = datas.rangePickerTime[0];
+    this.addTaskModel.task.projectId = this.projectId;
     this.addTaskModel.task.taskEndTime = datas.rangePickerTime[1];
     console.log(this.addTaskModel.task);
     this.teacherService.createTask(this.addTaskModel.task).subscribe(
@@ -163,7 +172,7 @@ export class ProjectComponent implements OnInit {
 
   createGroup() {
     if (this.groupName == null || this.groupName == '') {
-      this.message.error("小组名称不能为空");
+      this.message.error('小组名称不能为空');
       return;
     }
     this.courseService.createPjGroup(this.projectId, this.groupName).subscribe((result: any) => {

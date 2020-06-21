@@ -81,7 +81,7 @@ export class ProjectComponent implements OnInit {
     if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       obj = this.courseService.getAllPjGroupList(this.projectId);
     } else if (this.constants.state.role == this.constants.ROLES.TEACHER) {
-      obj = this.teacherService.getAllPjGroupList(this.projectId);
+      obj = this.courseService.getAllPjGroupList(this.projectId);
     }
     obj.subscribe(
       (result: any) => {
@@ -100,7 +100,7 @@ export class ProjectComponent implements OnInit {
     if (this.constants.state.role == this.constants.ROLES.STUDENT) {
       obj = this.courseService.getPjTaskList(this.projectId);
     } else if (this.constants.state.role == this.constants.ROLES.TEACHER) {
-      obj = this.teacherService.getPjTaskList(this.projectId);
+      obj = this.courseService.getPjTaskList(this.projectId);
     }
     obj.subscribe(
       (result: any) => {

@@ -40,6 +40,7 @@ import {SearchCourseComponent} from './main/student/search-course/search-course.
 import { UserinfoComponent } from './common/userinfo/userinfo.component';
 import { CourseInfoComponent } from './common/course-info/course-info.component';
 import { ProjectComponent } from './common/project/project.component';
+import { GroupComponent } from './common/group/group.component';
 
 registerLocaleData(zh);
 
@@ -67,6 +68,7 @@ registerLocaleData(zh);
     UserinfoComponent,
     CourseInfoComponent,
     ProjectComponent,
+    GroupComponent,
 
   ],
   imports: [

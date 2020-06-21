@@ -51,4 +51,29 @@ export class TeacherService {
     return this.httpClient.delete(this.constants.urls.TEACHER_REMOVE_PROJECT + projectId, httpoptions);
 
   }
+  getAllPjGroupList(projectId){
+    let httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.TEACHER_GET_GROUPS + projectId, httpoptions);
+  }
+  getPjGroupInfo(groupId){
+    let httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.TEACHER_GET_GROUP + groupId, httpoptions);
+  }
+  createTask(pjTask){
+    const httpoptions = this.constants.jsonTokenOptions();
+    return this.httpClient.post(this.constants.urls.TEACHER_CREATE_TASK, pjTask, httpoptions);
+  }
+  getPjTaskList(projectId){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.TEACHER_GET_TASKs + projectId, httpoptions);
+  }
+
+  getPjTaskInfo(pjTaskId){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.get(this.constants.urls.TEACHER_GET_TASK + pjTaskId, httpoptions);
+  }
+  removeTask(pjTaskId){
+    const httpoptions = this.constants.tokenOptions();
+    return this.httpClient.delete(this.constants.urls.TEACHER_REMOVE_TASK + pjTaskId, httpoptions);
+  }
 }

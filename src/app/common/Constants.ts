@@ -40,6 +40,9 @@ export class Constants {
     DELETE_FILE: this.urlBase + 'course/project/sharedFile/',
 
     DISCUSS_LIST: this.urlBase + 'course/project/discussionList/',
+    GET_DISCUSS: this.urlBase + 'course/project/discussionInfo/',
+    NEW_DISCUSS: this.urlBase + 'course/project/discussion',
+    NEW_REPLLY: this.urlBase + 'course/project/discussionReply',
 
     SEARCHCOURSE: this.urlBase + 'student/course/courseIndexInfo/',
     TAKE_COURSE: this.urlBase + 'student/course/studentInfo/takesCourse/',

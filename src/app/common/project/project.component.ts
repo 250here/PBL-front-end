@@ -5,6 +5,7 @@ import {Constants} from '../Constants';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {TeacherService} from '../../service/teacher.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {DiscussService} from '../../service/discuss.service';
 
 @Component({
   selector: 'app-project',
@@ -30,6 +31,9 @@ export class ProjectComponent implements OnInit {
     },
   };
 
+  commentDatas: any = [];
+  commentInput: any = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,6 +42,7 @@ export class ProjectComponent implements OnInit {
     private message: NzMessageService,
     private teacherService: TeacherService,
     private fb: FormBuilder,
+    private discussService: DiscussService,
   ) {
   }
 
@@ -47,6 +52,7 @@ export class ProjectComponent implements OnInit {
       this.projectId = +params.get('projectId');
       this.getAllTasks();
       this.getgroups();
+      this.getDiscusses();
       if (this.constants.state.role == this.constants.ROLES.STUDENT) {
         this.getMyGroup();
       }
@@ -175,14 +181,84 @@ export class ProjectComponent implements OnInit {
       this.message.error('小组名称不能为空');
       return;
     }
-    this.courseService.createPjGroup(this.projectId, this.groupName).subscribe((result: any) => {
-      if (result.code == '0') {
-        this.message.success(result.message);
-        this.getgroups();
-        this.getMyGroup();
-      } else {
-        this.message.error(result.message);
-      }
-    });
+    this.courseService.createPjGroup(this.projectId, this.groupName).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getgroups();
+          this.getMyGroup();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  getDiscusses() {
+    this.discussService.getDiscusses(this.projectId).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.commentDatas = result.data;
+          for (let discuss of result.data) {
+            this.getDiscuss(discuss.discId);
+          }
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  getDiscuss(disCussId) {
+    this.discussService.getDiscuss(disCussId).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.code == '0') {
+          for (let discuss of this.commentDatas) {
+            console.log(this.commentDatas);
+            if (discuss.discId == result.data.discussionTheme.discId) {
+              discuss.children = result.data.discussionReply;
+            }
+          }
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  addReply(discussId) {
+    const reply = {
+      discId: discussId,
+      pjId: this.projectId,
+      discMessage: this.commentInput,
+    };
+    this.discussService.replyDiscuss(reply).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getDiscusses();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  addDiscuss() {
+    const discuss = {
+      pjId: this.projectId,
+      discMessage: this.commentInput,
+      discTitle: 'no title',
+    };
+    this.discussService.newDiscuss(discuss).subscribe(
+      (result: any) => {
+        if (result.code == '0') {
+          this.message.success(result.message);
+          this.getDiscusses();
+        } else {
+          this.message.error(result.message);
+        }
+      });
+  }
+
+  clearInput() {
+    this.commentInput = '';
   }
 }

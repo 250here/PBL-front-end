@@ -27,7 +27,7 @@ export class TeacherService {
 
   deleteCourse(courseId){
     const tokenOptions = this.constants.tokenOptions();
-    return this.httpClient.post(this.constants.urls.DELETE_COURSE + courseId, {}, tokenOptions);
+    return this.httpClient.delete(this.constants.urls.DELETE_COURSE + courseId, tokenOptions);
   }
 
   addProject(project: any) {

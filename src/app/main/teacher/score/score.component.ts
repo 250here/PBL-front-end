@@ -61,6 +61,7 @@ export class ScoreComponent implements OnInit {
       (result: any) => {
         if (result.code == '0') {
           this.message.success(result.message);
+          this.getScoreInfo();
         } else {
           this.message.error(result.message);
         }

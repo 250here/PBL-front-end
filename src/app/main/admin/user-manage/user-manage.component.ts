@@ -14,8 +14,9 @@ import {Md5} from 'ts-md5/dist/md5';
 })
 export class UserManageComponent implements OnInit {
   userName;
+  userType = ['teacher', 'student'];
   data: any = null;
-  radioValue ;
+  userTypeValue: any = 'student';
   user = {
     userName: '',
     password: '',
@@ -38,6 +39,7 @@ export class UserManageComponent implements OnInit {
       userName: [null],
       password: [null],
       userId: [null],
+      userTypeValue: [null],
     });
   }
 
@@ -50,13 +52,14 @@ export class UserManageComponent implements OnInit {
       return;
     }
     let datas: any = this.validateForm.getRawValue();
-    console.log(datas);
+    this.userTypeValue = datas.userTypeValue;
+    console.log(this.userTypeValue);
     const newUser = {
       username: this.user.userName,
       password: Md5.hashStr(this.user.password),
       id: this.user.userId,
     };
-    if (this.radioValue == 'teacher') {
+    if (this.userTypeValue == 'teacher') {
       this.userService.addTeacher(newUser)
         .subscribe((result: any) => {
           console.log(result);
@@ -67,7 +70,7 @@ export class UserManageComponent implements OnInit {
           }
         });
     }
-    if (this.radioValue == 'student') {
+    if (this.userTypeValue == 'student') {
       this.userService.addStudent(newUser)
         .subscribe((result: any) => {
           console.log(result);
@@ -95,7 +98,7 @@ export class UserManageComponent implements OnInit {
       .subscribe((result: any) => {
         if (result.code == '0') {
           this.message.success('删除成功');
-          this.data=null;
+          this.data = null;
         } else {
           this.message.error(result.message);
         }
